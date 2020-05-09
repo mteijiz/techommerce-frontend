@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Brand } from 'src/app/Model/Brand/brand';
+import { BrandService } from 'src/app/Service/Brand/brand.service';
 
 @Component({
   selector: 'app-brand-table',
@@ -7,21 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BrandTableComponent implements OnInit {
 
-  denominations = [
-    { name: "twenty", plural: "twenties", value: 20.00 },
-    { name: "ten", plural: "tens", value: 10.00 },
-    { name: "five", plural: "fives", value: 5.00 },
-    { name: "one", plural: "ones", value: 1.00 },
-    { name: "quarter", plural: "quarters", value: 0.25 },
-    { name: "dime", plural: "dimes", value: 0.10 },
-    { name: "nickle", plural: "nickles", value: 0.05 },
-    { name: "penny", plural: "pennies", value: 0.01 }
-  ];
-  constructor() {
-    console.log(this.denominations);
-  }
+  brandList: Brand[];
+  errorMessage: String;
+
+  constructor(
+    private crudBrand: BrandService
+  ) { }
   ngOnInit() {
-   
+    this.crudBrand.getAllBrands().subscribe(
+      data => {
+        console.log('Success ', data);
+        this.brandList = data;
+        this.errorMessage = null;
+      },
+      error => {
+        console.log('Error ', error);
+        this.errorMessage = error.error.message;
+      }
+
+    )
   }
 
 }

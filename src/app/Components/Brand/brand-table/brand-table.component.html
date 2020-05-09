@@ -1,17 +1,27 @@
 <div class="container">
+  <hr>
+    <a class="btn btn-outline-dark" routerLink="add-brand" routerLinkActive="active">Add</a>
+  <hr>
+  <div *ngIf="errorMessage" class="text-center">
+    <hr>
+    <label class="text-danger">{{errorMessage}}</label>
+    <hr>
+  </div>
   <table class="table table-hover">
     <thead>
       <tr>
+        <th scope="col">Code</th>
         <th scope="col">Name</th>
-        <th scope="col">Plural</th>
-        <th scope="col">Value</th>
+        <th scope="col">Desciption</th>
+        <th scope="col">State</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let denomination of denominations | paginate: { itemsPerPage: 3, currentPage: p }">
-        <td>{{denomination.name}}</td>
-        <td>{{denomination.plural}}</td>
-        <td>{{denomination.value}}</td>
+      <tr *ngFor="let brand of brandList | paginate: { itemsPerPage: 3, currentPage: p }">
+        <td>{{brand.brandCode}}</td>
+        <td>{{brand.brandName}}</td>
+        <td>{{brand.brandDescription}}</td>
+        <td>{{brand.brandState}}</td>
       </tr>
     </tbody>
   </table>
