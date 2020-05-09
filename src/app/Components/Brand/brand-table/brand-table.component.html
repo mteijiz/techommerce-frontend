@@ -1,0 +1,21 @@
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Plural</th>
+        <th scope="col">Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let denomination of denominations | paginate: { itemsPerPage: 3, currentPage: p }">
+        <td>{{denomination.name}}</td>
+        <td>{{denomination.plural}}</td>
+        <td>{{denomination.value}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="container d-flex justify-content-center">
+    <pagination-controls class="my-pagination" (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
