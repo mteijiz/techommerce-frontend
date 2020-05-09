@@ -11,6 +11,7 @@ import { FooterComponent } from './Components/Header-Footer/footer/footer.compon
 import { BrandTableComponent } from './Components/Brand/brand-table/brand-table.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AddBrandComponent } from './Components/Brand/add-brand/add-brand.component';
+import { ValidationMessagesComponent } from './Components/validation-messages/validation-messages.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AddBrandComponent } from './Components/Brand/add-brand/add-brand.compon
     NavbarShopComponent,
     FooterComponent,
     BrandTableComponent,
-    AddBrandComponent
+    AddBrandComponent,
+    ValidationMessagesComponent
   ],
   imports: [
     BrowserModule,

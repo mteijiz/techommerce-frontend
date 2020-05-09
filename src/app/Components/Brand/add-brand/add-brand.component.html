@@ -12,6 +12,7 @@
       <div class="value">
         <div class="input-group">
           <input class="input--style-5" type="text" formControlName="brandCode">
+          <app-validation-messages [validation]="brandCreateForm.get('brandCode')"></app-validation-messages>
         </div>
       </div>
     </div>
@@ -20,6 +21,7 @@
       <div class="value">
         <div class="input-group">
           <input class="input--style-5" type="text" formControlName="brandName">
+          <app-validation-messages [validation]="brandCreateForm.get('brandName')"></app-validation-messages>
         </div>
       </div>
     </div>
@@ -31,7 +33,7 @@
         </div>
       </div>
     </div>
-    <button class="btn btn-outline-dark " type="submit">Add</button>
+    <button class="btn btn-outline-dark " type="submit" [disabled]="!brandCreateForm.valid">Add</button>
   </form>
   <hr>
 </div>
