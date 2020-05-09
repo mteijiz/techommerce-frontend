@@ -2,12 +2,16 @@
   <hr>
   <h2 class="title">Add Brand</h2>
   <hr>
-  <form method="POST">
+  <div *ngIf="errorMessage" class="text-center">
+    <label class="text-danger">{{errorMessage}}</label>
+    <hr>
+  </div>
+  <form [formGroup]="brandCreateForm" (ngSubmit)="onSubmit()">
     <div class="form-row">
       <div class="name">Code</div>
       <div class="value">
         <div class="input-group">
-          <input class="input--style-5" type="text" name="company">
+          <input class="input--style-5" type="text" formControlName="brandCode">
         </div>
       </div>
     </div>
@@ -15,7 +19,7 @@
       <div class="name">Name</div>
       <div class="value">
         <div class="input-group">
-          <input class="input--style-5" type="text" name="email">
+          <input class="input--style-5" type="text" formControlName="brandName">
         </div>
       </div>
     </div>
@@ -23,13 +27,11 @@
       <div class="name">Description</div>
       <div class="value">
         <div class="input-group">
-          <input class="input--style-5" type="textarea" name="email">
+          <input class="input--style-5" type="text" formControlName="brandDescription">
         </div>
       </div>
     </div>
-    <div class="">
-      <button class="btn btn-outline-dark " type="submit">Add</button>
-    </div>
+    <button class="btn btn-outline-dark " type="submit">Add</button>
   </form>
   <hr>
 </div>
