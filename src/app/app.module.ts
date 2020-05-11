@@ -12,6 +12,7 @@ import { BrandTableComponent } from './Components/Brand/brand-table/brand-table.
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AddBrandComponent } from './Components/Brand/add-brand/add-brand.component';
 import { ValidationMessagesComponent } from './Components/validation-messages/validation-messages.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ValidationMessagesComponent } from './Components/validation-messages/va
     NgxPaginationModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
