@@ -13,6 +13,7 @@ export class BrandService {
   getAllUrl = this.baseUrl + 'getAll';
   postUrl = this.baseUrl + 'add';
   updateUrl = this.baseUrl + 'update';
+  updateStateUrl = this.baseUrl + 'changeStatus';
 
   constructor(private http : HttpClient) { }
 
@@ -26,5 +27,9 @@ export class BrandService {
 
   updateBrand(brandToUpdate) : Observable<any>{
     return this.http.put<any>(this.updateUrl, brandToUpdate);
+  }
+
+  updateBrandState(brandToUpdate) : Observable<any>{
+    return this.http.put<any>(this.updateStateUrl, brandToUpdate);
   }
 }

@@ -15,6 +15,7 @@ export class BrandTableComponent implements OnInit {
   constructor(
     private crudBrand: BrandService
   ) { }
+
   ngOnInit() {
     this.crudBrand.getAllBrands().subscribe(
       data => {
@@ -27,6 +28,19 @@ export class BrandTableComponent implements OnInit {
         this.errorMessage = error.error.message;
       }
 
+    )
+  }
+
+  onClick(brand : Brand){
+    this.crudBrand.updateBrandState(brand).subscribe(
+      data=>{
+        console.log('Success', data);
+        this.ngOnInit();
+      },
+      error=>{
+        console.log('Fail', error);
+      }
+      
     )
   }
 
