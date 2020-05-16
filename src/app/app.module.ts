@@ -13,6 +13,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { AddBrandComponent } from './Components/Brand/add-brand/add-brand.component';
 import { ValidationMessagesComponent } from './Components/validation-messages/validation-messages.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { UpdateBrandComponent } from './Components/Brand/update-brand/update-brand.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     FooterComponent,
     BrandTableComponent,
     AddBrandComponent,
-    ValidationMessagesComponent
+    ValidationMessagesComponent,
+    UpdateBrandComponent
   ],
   imports: [
     BrowserModule,

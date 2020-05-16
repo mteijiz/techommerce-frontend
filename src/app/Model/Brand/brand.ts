@@ -4,6 +4,6 @@ export class Brand {
     public brandCode : String;
     public brandDescription : String;
     public brandName: String;
-    public brandState: String;
+    public brandState: Boolean;
 
 }

@@ -8,10 +8,11 @@ import { Brand } from 'src/app/Model/Brand/brand';
 })
 export class BrandService {
 
-  baseUrl = 'http://localhost:8080';
+  baseUrl = 'http://localhost:8080'+'/brands/';
 
-  getAllUrl = this.baseUrl + '/brands/getAll';
-  postUrl = this.baseUrl + '/brands/add'
+  getAllUrl = this.baseUrl + 'getAll';
+  postUrl = this.baseUrl + 'add';
+  updateUrl = this.baseUrl + 'update';
 
   constructor(private http : HttpClient) { }
 
@@ -21,5 +22,9 @@ export class BrandService {
 
   addBrand(brandToAdd) : Observable<any>{
     return this.http.post<any>(this.postUrl, brandToAdd)
+  }
+
+  updateBrand(brandToUpdate) : Observable<any>{
+    return this.http.put<any>(this.updateUrl, brandToUpdate);
   }
 }

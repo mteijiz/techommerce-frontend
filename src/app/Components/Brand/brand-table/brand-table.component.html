@@ -1,6 +1,6 @@
 <div class="container">
   <hr>
-    <a class="btn btn-outline-dark" routerLink="add-brand" routerLinkActive="active">Add</a>
+  <a class="btn btn-outline-dark" routerLink="add-brand" routerLinkActive="active">Add</a>
   <hr>
   <div *ngIf="errorMessage" class="text-center">
     <hr>
@@ -22,8 +22,22 @@
         <td>{{brand.brandCode}}</td>
         <td>{{brand.brandName}}</td>
         <td>{{brand.brandDescription}}</td>
-        <td>{{brand.brandState}}</td>
-        <td><i class="fa fa-pencil-square-o mx-3" aria-hidden="true"></i><i class="fa fa-trash mx-3" aria-hidden="true"></i></td>
+        <td>
+          <div *ngIf="brand.brandState else inactiveBrand">
+            ACTIVE
+          </div>
+          <ng-template #inactiveBrand>
+            INACTIVE
+          </ng-template>
+        </td>
+        <td>
+          <a routerLink="update-brand" routerLinkActive="active" [state]="brand" class="btn btn-outline-dark mr-1">
+            <i class="fa fa-pencil-square-o mx-3" aria-hidden="true"></i>
+          </a>
+          <a href="" class="btn btn-outline-dark ml-1"> 
+            Change State
+          </a>
+        </td>
       </tr>
     </tbody>
   </table>
