@@ -14,6 +14,8 @@ import { AddBrandComponent } from './Components/Brand/add-brand/add-brand.compon
 import { ValidationMessagesComponent } from './Components/validation-messages/validation-messages.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { UpdateBrandComponent } from './Components/Brand/update-brand/update-brand.component';
+import { CategoryTableComponent } from './Components/Category/category-table/category-table.component';
+import { AddCategoryComponent } from './Components/Category/add-category/add-category.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { UpdateBrandComponent } from './Components/Brand/update-brand/update-bra
     BrandTableComponent,
     AddBrandComponent,
     ValidationMessagesComponent,
-    UpdateBrandComponent
+    UpdateBrandComponent,
+    CategoryTableComponent,
+    AddCategoryComponent
   ],
   imports: [
     BrowserModule,

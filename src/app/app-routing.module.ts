@@ -3,13 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { BrandTableComponent } from './Components/Brand/brand-table/brand-table.component';
 import { AddBrandComponent } from './Components/Brand/add-brand/add-brand.component';
 import { UpdateBrandComponent } from './Components/Brand/update-brand/update-brand.component';
+import { CategoryTableComponent } from './Components/Category/category-table/category-table.component';
+import { AddCategoryComponent } from './Components/Category/add-category/add-category.component';
 
 const routes: Routes = [
-    {
-        path: '',
-        redirectTo: 'brand',
-        pathMatch: 'full'
-    },
     {
         path: 'brand',
         component: BrandTableComponent
@@ -21,6 +18,14 @@ const routes: Routes = [
     {
         path: 'brand/update-brand',
         component: UpdateBrandComponent
+    },
+    {
+        path: 'category',
+        component: CategoryTableComponent
+    },
+    {
+        path: 'category/add-category',
+        component: AddCategoryComponent
     }
 ]
 
