@@ -9,8 +9,8 @@ import { CategoryService } from 'src/app/Service/Category/category.service';
 })
 export class CategoryTableComponent implements OnInit {
 
-  public errorMessage : String;
-  public categoryList : Category[];
+  public errorMessage: String;
+  public categoryList: Category[];
 
   constructor(
     private crudCategory: CategoryService
@@ -27,7 +27,19 @@ export class CategoryTableComponent implements OnInit {
         console.log('Error ', error);
         this.errorMessage = error.error.message;
       }
+    )
+  }
 
+  onClick(category : Category){
+    this.crudCategory.updateCategoryState(category).subscribe(
+      data=>{
+        console.log('Success', data);
+        this.ngOnInit();
+      },
+      error=>{
+        console.log('Fail', error);
+      }
+      
     )
   }
 

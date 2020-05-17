@@ -5,6 +5,7 @@ import { AddBrandComponent } from './Components/Brand/add-brand/add-brand.compon
 import { UpdateBrandComponent } from './Components/Brand/update-brand/update-brand.component';
 import { CategoryTableComponent } from './Components/Category/category-table/category-table.component';
 import { AddCategoryComponent } from './Components/Category/add-category/add-category.component';
+import { UpdateCategoryComponent } from './Components/Category/update-category/update-category.component';
 
 const routes: Routes = [
     {
@@ -26,6 +27,10 @@ const routes: Routes = [
     {
         path: 'category/add-category',
         component: AddCategoryComponent
+    },
+    {
+        path: 'category/update-category',
+        component: UpdateCategoryComponent
     }
 ]
 

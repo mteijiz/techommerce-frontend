@@ -16,6 +16,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { UpdateBrandComponent } from './Components/Brand/update-brand/update-brand.component';
 import { CategoryTableComponent } from './Components/Category/category-table/category-table.component';
 import { AddCategoryComponent } from './Components/Category/add-category/add-category.component';
+import { UpdateCategoryComponent } from './Components/Category/update-category/update-category.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AddCategoryComponent } from './Components/Category/add-category/add-cat
     ValidationMessagesComponent,
     UpdateBrandComponent,
     CategoryTableComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
+    UpdateCategoryComponent
   ],
   imports: [
     BrowserModule,
