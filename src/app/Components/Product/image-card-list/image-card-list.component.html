@@ -1,0 +1,8 @@
+<div class="row mx-auto">
+  <div class="card mx-2 my-4" style="width: 15rem;" *ngFor="let image of images">
+    <img src="{{'data:' + image.imageType + ';base64,' + image.imageBytes}}" style="width: 250px; height: 250px;" class="mx-auto d-block">
+    <div class="card-body">
+      <button href="#" class="btn" (click)="openImageDeleteFormModal(image)">Delete</button>
+    </div>
+  </div>
+</div>

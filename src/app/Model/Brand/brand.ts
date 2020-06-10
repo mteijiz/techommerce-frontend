@@ -6,4 +6,7 @@ export class Brand {
     public brandName: String;
     public brandState: Boolean;
 
+    constructor(){
+        this.brandName="";
+    }
 }

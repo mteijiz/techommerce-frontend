@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -17,6 +17,21 @@ import { UpdateBrandComponent } from './Components/Brand/update-brand/update-bra
 import { CategoryTableComponent } from './Components/Category/category-table/category-table.component';
 import { AddCategoryComponent } from './Components/Category/add-category/add-category.component';
 import { UpdateCategoryComponent } from './Components/Category/update-category/update-category.component';
+import { SubcategoryTableComponent } from './Components/Subcategory/subcategory-table/subcategory-table.component';
+import { AddSubcategoryComponent } from './Components/Subcategory/add-subcategory/add-subcategory.component';
+import { UpdateSubcategoryComponent } from './Components/Subcategory/update-subcategory/update-subcategory.component';
+import { ProductTableComponent } from './Components/Product/product-table/product-table.component';
+import { AddProductComponent } from './Components/Product/add-product/add-product.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UpdateProductComponent } from './Components/Product/update-product/update-product.component';
+import { ImageCardListComponent } from './Components/Product/image-card-list/image-card-list.component';
+import { ModalDeleteImageComponent } from './Components/Modal/modal-delete-image/modal-delete-image.component';
+import { ProductListComponent } from './Components/Product/product-list/product-list.component';
+import { KeycloakSecurityService } from './Service/Keycloak/keycloak-security.service';
+
+export function kcFactory(kcSecurity:KeycloakSecurityService){
+  return () => kcSecurity.init(); 
+}
 
 @NgModule({
   declarations: [
@@ -30,7 +45,16 @@ import { UpdateCategoryComponent } from './Components/Category/update-category/u
     UpdateBrandComponent,
     CategoryTableComponent,
     AddCategoryComponent,
-    UpdateCategoryComponent
+    UpdateCategoryComponent,
+    SubcategoryTableComponent,
+    AddSubcategoryComponent,
+    UpdateSubcategoryComponent,
+    ProductTableComponent,
+    AddProductComponent,
+    UpdateProductComponent,
+    ImageCardListComponent,
+    ModalDeleteImageComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,
@@ -38,9 +62,15 @@ import { UpdateCategoryComponent } from './Components/Category/update-category/u
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    NgbModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: APP_INITIALIZER, deps: [KeycloakSecurityService], useFactory: kcFactory, multi: true }
+  ],
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ModalDeleteImageComponent
+  ]
 })
 export class AppModule { }

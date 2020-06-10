@@ -6,4 +6,7 @@ export class Category {
     public categoryDescription : String;
     public categoryState : boolean;
 
+    constructor(){
+        this.categoryName="";
+    }
 }

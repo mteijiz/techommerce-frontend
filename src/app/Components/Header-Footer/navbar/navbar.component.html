@@ -7,22 +7,28 @@
     </button>
     <div class="collapse navbar-collapse font-weight-bolder" id="responsiveNavbar">
       <ul class="navbar-nav ml-auto nav-flex-icons">
-        <li class="nav-item">
-          <a class="nav-link waves-effect waves-light">
+        <li class="nav-item" *ngIf="!securityService.keycloak.authenticated">
+          <a class="nav-link waves-effect waves-light" (click)="onRegister()">
             Register
             <i class="fas fa-user-plus"></i>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link waves-effect waves-light">
+        <li class="nav-item" *ngIf="!securityService.keycloak.authenticated">
+          <a class="nav-link waves-effect waves-light" (click)="onLogin()">
             Login
             <i class="fas fa-user-circle"></i>
           </a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item" *ngIf="securityService.keycloak.authenticated">
+          <a class="nav-link waves-effect waves-light" (click)="onLogout()">
+            Logout
+            <i class="fas fa-user-circle"></i>
+          </a>
+        </li>
+        <li class="nav-item dropdown" *ngIf="securityService.keycloak.authenticated">
           <a class="nav-link dropdown-toggle" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
-            Profile
+            {{securityService.keycloak.tokenParsed.email}}
             <i class="fas fa-user-circle"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="profileDropdown">
@@ -31,7 +37,7 @@
             <a class="dropdown-item" href="#">Something else here</a>
           </div>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" *ngIf="isAppManager()">
           <a class="nav-link dropdown-toggle" id="settingDropdown" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
             Setting
@@ -40,11 +46,12 @@
           <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="settingDropdown">
             <a class="dropdown-item" routerLink="brand" routerLinkActive="active">Brand</a>
             <a class="dropdown-item" routerLink="category" routerLinkActive="active">Category</a>
-            <a class="dropdown-item" href="#">Product</a>
+            <a class="dropdown-item" routerLink="subcategory" routerLinkActive="active">Subcategory</a>
+            <a class="dropdown-item" routerLink="product" routerLinkActive="active">Product</a>
           </div>
         </li>
       </ul>
+      
     </div>
   </nav>
 </div>
-
