@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -28,6 +28,7 @@ import { ImageCardListComponent } from './Components/Product/image-card-list/ima
 import { ModalDeleteImageComponent } from './Components/Modal/modal-delete-image/modal-delete-image.component';
 import { ProductListComponent } from './Components/Product/product-list/product-list.component';
 import { KeycloakSecurityService } from './Service/Keycloak/keycloak-security.service';
+import { RequestInterceptorService } from './Service/Request-interceptor/request-interceptor.service';
 
 export function kcFactory(kcSecurity:KeycloakSecurityService){
   return () => kcSecurity.init(); 
@@ -66,7 +67,8 @@ export function kcFactory(kcSecurity:KeycloakSecurityService){
     NgbModule
   ],
   providers: [
-    { provide: APP_INITIALIZER, deps: [KeycloakSecurityService], useFactory: kcFactory, multi: true }
+    { provide: APP_INITIALIZER, deps: [KeycloakSecurityService], useFactory: kcFactory, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent],
   entryComponents: [
