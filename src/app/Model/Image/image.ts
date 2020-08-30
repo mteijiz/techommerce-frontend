@@ -4,5 +4,5 @@ export class Image {
     public imageName : String;
     public imageType : String;
     public imageBytes : any;
-    
+    public isMainimage : boolean
 }

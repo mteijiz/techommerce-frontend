@@ -1,25 +1,40 @@
 <div class="container-fluid background">
   <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-dark font-container font-weight-bolder px-0">
-      <a class="pl-0 pr-2 text-white" href="#">Home <span class="sr-only">(current)</span></a>
+    <nav class="navbar navbar-expand-lg navbar-dark font-container px-0">
+      <span class="pl-0 pr-2 text-white ">Tienda</span>
       <!--Hace que el hamburger button este a la derecha y no a la izquierda-->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#responsiveMenu"
         aria-controls="responsiveMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="responsiveMenu">
-        <ul class="navbar-nav mr-auto ">
+      <div class="collapse navbar-collapse font-weight-bolder" id="responsiveMenu">
+        <ul class="navbar-nav mr-auto ml-auto nav-flex-icons">
           <li class="nav-item">
-            <a class="nav-link" routerLink="shop" routerLinkActive="active">Shop</a>
+            <a class="nav-link" routerLink="home" routerLinkActive="active">Inicio <i class="fa fa-home" aria-hidden="true"></i></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Offers</a>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">Shop <i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+              <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="profileDropdown">
+                <a class="dropdown-item" routerLink="shop/all-categories" >Todas las categorías</a>
+                <a class="dropdown-item" *ngFor="let category of categoryList" [routerLink]="['shop', category.categoryName]"  >{{category.categoryName}}</a>
+              </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Whishlist</a>
+          <li class="nav-item" *ngIf="securityService.keycloak.authenticated">
+            <a class="nav-link" routerLink="cart" routerLinkActive="active" >Carrito <i class="fa fa-shopping-cart" aria-hidden="true"> <span class="badge badge-light ml-2">{{quantityOfProductInCart}}</span></i></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Cart</a>
+          <li class="nav-item dropdown" *ngIf="securityService.keycloak.authenticated && isAppManager()">
+            <a class="nav-link dropdown-toggle" id="settingDropdown" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              Configuraciones
+              <i class="fa fa-cogs" aria-hidden="true"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="settingDropdown">
+              <a class="dropdown-item" routerLink="brand" routerLinkActive="active">Marcas</a>
+              <a class="dropdown-item" routerLink="category" routerLinkActive="active">Categorías</a>
+              <a class="dropdown-item" routerLink="subcategory" routerLinkActive="active">Subcategorías</a>
+              <a class="dropdown-item" routerLink="product" routerLinkActive="active">Productos</a>
+            </div>
           </li>
         </ul>
       </div>

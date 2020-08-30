@@ -7,6 +7,7 @@ import { Category } from 'src/app/Model/Category/category';
   providedIn: 'root'
 })
 export class CategoryService {
+  
 
   baseUrl = 'http://localhost:8080' + '/categories/';
   
@@ -14,6 +15,7 @@ export class CategoryService {
   getAllCategoriesUrl = this.baseUrl + 'getAll';
   updateUrl = this.baseUrl + 'update';
   updateStateUrl = this.baseUrl + 'updateState';
+  getActiveCategoriesUrl = this.baseUrl + 'getActive'
 
   constructor(private http:HttpClient) { }
 
@@ -31,6 +33,10 @@ export class CategoryService {
   
   updateCategoryState(category : Category) : Observable<any>{
     return this.http.put<any>(this.updateStateUrl, category);
+  }
+
+  getAllActiveCategory() {
+    return this.http.get<Category[]>(this.getActiveCategoriesUrl);
   }
 
 }

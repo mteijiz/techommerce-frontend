@@ -1,6 +1,6 @@
 <div class="container ">
   <hr>
-  <h2 class="title">Add Subcategory</h2>
+  <h2 class="title">Agregar subcategoría</h2>
   <hr>
   <div *ngIf="errorMessage" class="text-center">
     <label class="text-danger">{{errorMessage}}</label>
@@ -8,35 +8,46 @@
   </div>
   <form [formGroup]="subcategoryCreateForm" (ngSubmit)="onSubmit()">
     <div class="form-group row">
-      <label for="subcategoryCode" class="col-sm-2 col-form-label">Code</label>
+      <label for="subcategoryCode" class="col-sm-2 col-form-label">Código</label>
       <div class="col-sm-10">
         <input type="text" class="form-control" formControlName="subcategoryCode">
         <app-validation-messages [validation]="subcategoryCreateForm.get('subcategoryCode')"></app-validation-messages>
       </div>
     </div>
     <div class="form-group row">
-      <label for="subcategoryName" class="col-sm-2 col-form-label">Name</label>
+      <label for="subcategoryName" class="col-sm-2 col-form-label">Nombre</label>
       <div class="col-sm-10">
         <input class="form-control" type="text" formControlName="subcategoryName">
         <app-validation-messages [validation]="subcategoryCreateForm.get('subcategoryName')"></app-validation-messages>
       </div>
     </div>
     <div class="form-group row">
-      <label for="subcategoryDescription" class="col-sm-2 col-form-label">Description</label>
+      <label for="subcategoryDescription" class="col-sm-2 col-form-label">Descripción</label>
       <div class="col-sm-10">
-        <input class="form-control" type="text" formControlName="subcategoryDescription">
+        <textarea class="form-control" type="text" formControlName="subcategoryDescription"></textarea>
+        <app-validation-messages [validation]="subcategoryCreateForm.get('subcategoryDescription')">
+        </app-validation-messages>
       </div>
     </div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text" for="inputGroupSelect01">Category</label>
+    <div class="form-group row">
+      <label for="productDescription" class="col-sm-2 col-form-label">Activo</label>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" formControlName="subcategoryState">
+        </div>
       </div>
-      <select class="custom-select" id="inputGroupSelect01" formControlName="category">
-        <option *ngFor="let category of categoryList" [ngValue]="category">{{category.categoryName}}</option>
-      </select>
+    </div>
+    <div class="form-group row mb-3">
+      <label class="col-sm-2 col-form-label" for="inputGroupSelect01">Categoría</label>
+      <div class="col-sm-10">
+        <select class="custom-select" id="inputGroupSelect01" formControlName="category">
+          <option *ngFor="let category of categoryList" [ngValue]="category">{{category.categoryName}}</option>
+        </select>
+      </div>
       <app-validation-messages [validation]="subcategoryCreateForm.get('category')"></app-validation-messages>
     </div>
-    <button class="btn btn-outline-dark " type="submit" [disabled]="!subcategoryCreateForm.valid">Add</button>
+    <button class="btn btn-outline-dark mr-2" type="submit" [disabled]="!subcategoryCreateForm.valid">Agregar</button>
+    <button class="btn btn-outline-dark ml-2" type="button" (click)="getToSubcategoryTable()">Atrás</button>
   </form>
   <hr>
 </div>

@@ -29,6 +29,16 @@ import { ModalDeleteImageComponent } from './Components/Modal/modal-delete-image
 import { ProductListComponent } from './Components/Product/product-list/product-list.component';
 import { KeycloakSecurityService } from './Service/Keycloak/keycloak-security.service';
 import { RequestInterceptorService } from './Service/Request-interceptor/request-interceptor.service';
+import { CartComponent } from './Components/Cart shopping/cart/cart.component';
+import { ProductDetailsComponent } from './Components/Product/product-details/product-details.component';
+import { HomeComponent } from './Components/Home/home/home.component';
+import { ProductFilterComponent } from './Components/Product/product-filter/product-filter.component';
+import { ProductCarouselComponent } from './Components/Product/product-carousel/product-carousel.component';
+import { ProductVoteComponent } from './Components/Product/product-vote/product-vote.component';
+import { ShoppingHistoryComponent } from './Components/Cart shopping/shopping-history/shopping-history.component';
+import { CreditCardComponent } from './Components/Cart shopping/credit-card/credit-card.component';
+import { ShoppingHistoryDetailsComponent } from './Components/Cart shopping/shopping-history-details/shopping-history-details.component';
+import { CartProductFormComponent } from './Components/Form/cart-product-form/cart-product-form.component'; 
 
 export function kcFactory(kcSecurity:KeycloakSecurityService){
   return () => kcSecurity.init(); 
@@ -55,7 +65,17 @@ export function kcFactory(kcSecurity:KeycloakSecurityService){
     UpdateProductComponent,
     ImageCardListComponent,
     ModalDeleteImageComponent,
-    ProductListComponent
+    ProductListComponent,
+    CartComponent,
+    ProductDetailsComponent,
+    HomeComponent,
+    ProductFilterComponent,
+    ProductCarouselComponent,
+    ProductVoteComponent,
+    ShoppingHistoryComponent,
+    CreditCardComponent,
+    ShoppingHistoryDetailsComponent,
+    CartProductFormComponent
   ],
   imports: [
     BrowserModule,

@@ -9,35 +9,26 @@ import { SubcategoryService } from 'src/app/Service/Subcategory/subcategory.serv
 })
 export class SubcategoryTableComponent implements OnInit {
 
-  public errorMessage: String;
-  public subcategoryList: Subcategory[];
+  private errorMessage: String;
+  private subcategoryList: Subcategory[];
+  private stateMessage : String;
 
   constructor(
-    private crudSubcategory : SubcategoryService
+    private subcategoryService : SubcategoryService
   ) { }
 
   ngOnInit() {
-    this.crudSubcategory.getAllsubcategories().subscribe(
+    this.getAllSubcategories();
+  }
+
+  getAllSubcategories(){
+    this.subcategoryService.getAllSubcategories().subscribe(
       data =>{
-        console.log('Success ', data);
         this.subcategoryList = data;
         this.errorMessage = null;
       },
       error => {
-        console.log('Error ', error);
         this.errorMessage = error.error.message;
-      }
-    )
-  }
-
-  onClick(subcategory : Subcategory){
-    this.crudSubcategory.updateSubcategoryState(subcategory).subscribe(
-      data=>{
-        console.log('Success', data);
-        this.ngOnInit();
-      },
-      error=>{
-        console.log('Fail', error);
       }
     )
   }

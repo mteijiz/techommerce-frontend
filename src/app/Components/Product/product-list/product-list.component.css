@@ -1,0 +1,12 @@
+div {
+  white-space: pre-line;
+}
+
+.my-pagination /deep/ .ngx-pagination {
+  padding: 0;
+
+}
+
+.my-pagination /deep/ .ngx-pagination .current {
+  background-color: #393e46;
+}

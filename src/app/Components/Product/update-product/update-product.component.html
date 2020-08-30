@@ -1,82 +1,93 @@
+
 <div class="container ">
   <hr>
-  <h2 class="title">Add Product</h2>
+  <h2 class="title">Actualizar producto</h2>
   <hr>
-  {{productUpdateForm.value | json}}
   <div *ngIf="errorMessage" class="text-center">
     <label class="text-danger">{{errorMessage}}</label>
     <hr>
   </div>
   <form [formGroup]="productUpdateForm" (ngSubmit)="onSubmit()">
-    <div class="form-group row">
-      <label for="productCode" class="col-sm-2 col-form-label">Code</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" formControlName="productCode">
-        <app-validation-messages [validation]="productUpdateForm.get('productCode')"></app-validation-messages>
+    <fieldset>
+      <div class="form-group row">
+        <label for="productCode" class="col-sm-2 col-form-label">Código</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" formControlName="productCode">
+          <app-validation-messages [validation]="productUpdateForm.get('productCode')"></app-validation-messages>
+        </div>
       </div>
-    </div>
+    </fieldset>
     <div class="form-group row">
-      <label for="productName" class="col-sm-2 col-form-label">Name</label>
+      <label for="productName" class="col-sm-2 col-form-label">Nombre</label>
       <div class="col-sm-10">
         <input class="form-control" type="text" formControlName="productName">
         <app-validation-messages [validation]="productUpdateForm.get('productName')"></app-validation-messages>
       </div>
     </div>
     <div class="form-group row">
-      <label for="productDescription" class="col-sm-2 col-form-label">Description</label>
+      <label for="productDescription" class="col-sm-2 col-form-label">Descripción</label>
       <div class="col-sm-10">
         <input class="form-control" type="text" formControlName="productDescription">
+        <app-validation-messages [validation]="productUpdateForm.get('productDescription')"></app-validation-messages>
       </div>
     </div>
     <div class="form-group row">
-      <label for="productDescription" class="col-sm-2 col-form-label">Price</label>
+      <label for="productDescription" class="col-sm-2 col-form-label">Precio ($)</label>
       <div class="col-sm-10">
         <input type="number" step=".01" class="form-control" formControlName="productPrice" id="productPrice">
         <app-validation-messages [validation]="productUpdateForm.get('productPrice')"></app-validation-messages>
       </div>
     </div>
     <div class="form-group row">
-      <label for="productDescription" class="col-sm-2 col-form-label">Quantity</label>
+      <label for="productDescription" class="col-sm-2 col-form-label">Actualizar stock</label>
       <div class="col-sm-10">
         <input type=" number" class="form-control" formControlName="productQuantity" id="productQuantity">
         <app-validation-messages [validation]="productUpdateForm.get('productQuantity')"></app-validation-messages>
       </div>
     </div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text" for="inputGroupSelect01">Brand</label>
+    <div class="form-group row">
+      <label for="productDescription" class="col-sm-2 col-form-label">Activo</label>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" formControlName="productState">
+        </div>
       </div>
-      <select class="custom-select" id="inputGroupSelect01" formControlName="productBrand">
-        <option *ngFor="let brand of brandList" [ngValue]="brand" [selected]="brand.brandId === product.productBrand.brandId">{{brand.brandName}}</option>
-      </select>
+    </div>
+    <div class="form-group row mb-3">
+      <label class="col-sm-2 col-form-label" for="inputGroupSelect01">Marca</label>
+      <div class="col-sm-10">
+        <select class="custom-select" id="inputGroupSelect01" formControlName="productBrand">
+          <option *ngFor="let brand of brandList" [ngValue]="brand">{{brand.brandName}}</option>
+        </select>
+      </div>
       <app-validation-messages [validation]="productUpdateForm.get('productBrand')"></app-validation-messages>
     </div>
-
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text" for="inputGroupSelect01">Category</label>
+    <div class="form-group row mb-3">
+      <label class="col-sm-2 col-form-label" for="inputGroupSelect02">Categoría</label>
+      <div class="col-sm-10">
+        <select class="custom-select" id="inputGroupSelect01" formControlName="productCategory"
+          (change)="onSelect(+$event.target.selectedOptions[0].dataset.value)">
+          <option *ngFor="let category of categoryList" [ngValue]="category">
+            {{category.categoryName}}</option>
+        </select>
       </div>
-      <select class="custom-select" id="inputGroupSelect01" formControlName="productCategory"
-        (change)="onSelect(+$event.target.selectedOptions[0].dataset.value)">
-        <option *ngFor="let category of categoryList" [ngValue]="category" [attr.data-value]="category.categoryId" [selected]="category.categoryId === product.productCategory.categoryId">
-          {{category.categoryName}}</option>
-      </select>
       <app-validation-messages [validation]="productUpdateForm.get('productCategory')"></app-validation-messages>
     </div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text" for="inputGroupSelect01">Subcategory</label>
+    <div class="form-group row mb-3">
+      <label class="col-sm-2 col-form-label" for="inputGroupSelect03">Subcategoría</label>
+      <div class="col-sm-10">
+        <select class="custom-select" id="inputGroupSelect01" formControlName="productSubcategory">
+          <option *ngFor="let subcategory of subcategoryListFiltered" [ngValue]="subcategory">
+            {{subcategory.subcategoryName}}</option>
+        </select>
       </div>
-      <select class="custom-select" id="inputGroupSelect01" formControlName="productSubcategory">
-        <option *ngFor="let subcategory of subcategoryListFiltered" [ngValue]="subcategory" [selected]="subcategory.subcategoryId === product.productSubcategory.subcategoryId">
-          {{subcategory.subcategoryName}}</option>
-      </select>
       <app-validation-messages [validation]="productUpdateForm.get('productSubcategory')"></app-validation-messages>
     </div>
-    <div class="container">
+    <!--<div class="container">
       <app-image-card-list [product]="product"></app-image-card-list>
-    </div>
-    <button class="btn btn-outline-dark " type="submit" [disabled]="!productUpdateForm.valid">Update</button>
+    </div>-->
+    <button class="btn btn-outline-dark " type="submit" [disabled]="!productUpdateForm.valid">Actualizar</button>
+    <button class="btn btn-outline-dark ml-2" type="button" (click)="getToProductTable()">Atrás</button>
   </form>
   <hr>
 </div>

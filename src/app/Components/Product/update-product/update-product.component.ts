@@ -9,6 +9,7 @@ import { Brand } from 'src/app/Model/Brand/brand';
 import { Category } from 'src/app/Model/Category/category';
 import { Subcategory } from 'src/app/Model/Subcategory/subcategory';
 import { Product } from 'src/app/Model/Product/product';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-update-product',
@@ -23,7 +24,7 @@ export class UpdateProductComponent implements OnInit {
   public subcategoryList: Subcategory[];
   public subcategoryListFiltered: Subcategory[];
   public productImages: File[] = [];
-  public product : Product;
+  public product: Product;
 
   constructor(
     private crudProduct: ProductService,
@@ -31,12 +32,13 @@ export class UpdateProductComponent implements OnInit {
     private crudCategory: CategoryService,
     private crudSubcategory: SubcategoryService,
     private createProductFormBuilder: FormBuilder,
-    private crudProductimage: ImageService
+    private crudProductimage: ImageService,
+    private router: Router
   ) { }
 
   productUpdateForm;
 
-  get productId(){
+  get productId() {
     return this.productUpdateForm.get('productId');
   }
   get productCode() {
@@ -54,10 +56,10 @@ export class UpdateProductComponent implements OnInit {
   get productQuantity() {
     return this.productUpdateForm.get('productQuantity');
   }
-  get productQuantityOfVotes(){
+  get productQuantityOfVotes() {
     return this.productUpdateForm.get('productQuantityOfVotes');
   }
-  get productQuantityRate(){
+  get productQuantityRate() {
     return this.productUpdateForm.get('productQuantityRate');
   }
   get productBrand() {
@@ -74,75 +76,120 @@ export class UpdateProductComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.product = history.state;
+    if (localStorage.getItem("product") != null)
+      this.getLocalStorage();
+    else {
+      this.product = history.state;
+      console.log("ngOnInit: ", JSON.stringify(history.state));
+      localStorage.setItem("product", JSON.stringify(history.state));
+    }
+    this.setProductFormValues();
+    this.getAllBrands();
+    this.getAllCategories();
+    this.getAllSubcategories();
+  }
+
+  setProductFormValues(){
     this.productUpdateForm = this.createProductFormBuilder.group({
       productId: [this.product.productId, [Validators.required]],
-      productCode: [this.product.productCode, [Validators.required]],
-      productName: [this.product.productName, [Validators.required]],
-      productDescription: [this.product.productDescription],
+      productCode: [this.product.productCode, [Validators.required, Validators.maxLength(10)]],
+      productName: [this.product.productName, [Validators.required, Validators.maxLength(15)]],
+      productDescription: [this.product.productDescription, [Validators.maxLength(1000)]],
       productPrice: [this.product.productPrice, [Validators.required, Validators.min(0)]],
-      productQuantity: [this.product.productQuantity, [Validators.required, Validators.min(0)]],
+      productQuantity: [this.product.productQuantity, [Validators.required]],
       productQuantityOfVotes: [this.product.productQuantityOfVotes, [Validators.required, Validators.min(0)]],
-      productQuantityRate: [this.product.productRate, [Validators.required, Validators.min(0)]],
-      productBrand: [this.product.productBrand, [Validators.required]],
-      productCategory: [this.product.productCategory, [Validators.required]],
-      productSubcategory: [this.product.productSubcategory, [Validators.required]],
+      productTotalPoints: [this.product.productTotalPoints, [Validators.required, Validators.min(0)]],
+      productRate: [this.product.productRate, [Validators.required, Validators.min(0)]],
+      productBrand: ['', [Validators.required]],
+      productCategory: ['', [Validators.required]],
+      productSubcategory: ['', [Validators.required]],
       productState: [this.product.productState, [Validators.required]]
     })
+  }
+
+  getAllBrands(){
     this.crudBrand.getAllBrands().subscribe(
       data => {
         console.log('Success', data);
         this.brandList = data;
+        for(let i = 0; i < this.brandList.length; i++){
+          if(this.brandList[i].brandId === this.product.productBrand.brandId){
+            this.productUpdateForm.patchValue({productBrand: this.brandList[i]});
+          }
+        }
       },
       error => {
         console.log('Fail', error);
       }
     );
+  }
+
+  getAllCategories(){
     this.crudCategory.getAllCategories().subscribe(
       data => {
         console.log('Success', data);
         this.categoryList = data;
+        for(let i = 0; i < this.categoryList.length; i++){
+          if(this.categoryList[i].categoryId === this.product.productCategory.categoryId){
+            this.productUpdateForm.patchValue({productCategory: this.categoryList[i]});
+          }
+        }
       },
       error => {
         console.log('Fail', error);
       }
     );
-    this.crudSubcategory.getAllsubcategories().subscribe(
+  }
+
+  getAllSubcategories(){
+    this.crudSubcategory.getAllSubcategories().subscribe(
       data => {
         console.log('Success', data);
         this.subcategoryList = data;
+        for(let i = 0; i < this.subcategoryList.length; i++){
+          if(this.subcategoryList[i].subcategoryId === this.product.productSubcategory.subcategoryId){
+            this.productUpdateForm.patchValue({productSubcategory: this.subcategoryList[i]});
+          }
+        }
+        this.onSelect(this.product.productCategory.categoryId);
       },
       error => {
         console.log('Fail', error);
       }
     )
   }
+
+  getLocalStorage() {
+    this.product = JSON.parse(localStorage.getItem("product"));
+  }
+
+  ngOnDestroy() {
+    console.log("ng on destroy");
+    localStorage.removeItem("product");
+  }
+
   onSubmit() {
-    /*this.crudProduct.addProduct(this.productUpdateForm.value).subscribe(
+    this.crudProduct.updateProduct(this.productUpdateForm.value).subscribe(
       data => {
         console.log('Success', data);
-        this.crudProductimage.uploadImage(imageFormData, data.productId).
-          subscribe(
-            data => {
-              console.log('Success', data);
-            },
-            error => {
-              console.log('Fail image log: ', error);
-              this.errorMessage = error.error.message;
-              console.log(this.errorMessage);
-            }
-          )
         this.errorMessage = null;
+        this.router.navigateByUrl('/product');
       },
       error => {
         console.log('Fail', error);
         this.errorMessage = error.error.message;
       }
-    )*/
+    )
+    
   }
 
   onSelect(categoryId: number) {
+    console.log("on select: ", categoryId);
     this.subcategoryListFiltered = this.subcategoryList.filter((subcategoryList) => subcategoryList.category.categoryId == categoryId);
+  }
+
+  getToProductTable() {
+    this.router.navigateByUrl('/product');
   }
 
 }

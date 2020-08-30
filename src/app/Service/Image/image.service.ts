@@ -7,23 +7,38 @@ import { Observable } from 'rxjs';
 })
 export class ImageService {
 
-  _baseUrl = 'http://localhost:8080' + '/images/';
+  baseUrl = 'http://localhost:8080' + '/images/';
 
-  _postImageUrl = this._baseUrl + 'upload/';
-  _getProductImageUrl = this._baseUrl + 'get/';
-  _deleteImageUrl = this._baseUrl + 'delete/'
+  postImageUrl = this.baseUrl + 'upload/';
+  getProductImageUrl = this.baseUrl + 'get/';
+  deleteImageUrl = this.baseUrl + 'delete/';
+  postMainImageUrl = this.baseUrl + 'uploadMain/';
+  getProductMainImageUrl = this.baseUrl + 'getMain/';
+  updateMainImage = this.baseUrl + 'updateMainImage/';
 
-  constructor(private _http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   uploadImage(imageData: FormData, productId: number): Observable<any> {
-    return this._http.post<any>(`${this._postImageUrl}${productId}`, imageData);
+    return this.http.post<any>(`${this.postImageUrl}${productId}`, imageData);
   }
 
   getAllProductImages(productId: number): Observable<any> {
-    return this._http.get<any>(`${this._getProductImageUrl}${productId}`);
+    return this.http.get<any>(`${this.getProductImageUrl}${productId}`);
   }
 
   deleteImage(imageId) : Observable<any>{
-    return this._http.delete<any>(`${this._deleteImageUrl}${imageId}`);
+    return this.http.delete<any>(`${this.deleteImageUrl}${imageId}`);
+  }
+
+  uploadMainImage(mainImageFormData: FormData, productId: any) {
+    return this.http.post<any>(`${this.postMainImageUrl}${productId}`, mainImageFormData);
+  }
+
+  getMainImage(productId: any) {
+    return this.http.get<any>(`${this.getProductMainImageUrl}${productId}`);
+  }
+
+  changeMainImage(imageForm: any) : Observable<any> {
+    return this.http.put<any>(this.updateMainImage, imageForm);
   }
 }

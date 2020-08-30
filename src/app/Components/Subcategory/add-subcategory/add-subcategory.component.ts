@@ -3,6 +3,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { SubcategoryService } from 'src/app/Service/Subcategory/subcategory.service';
 import { CategoryService } from 'src/app/Service/Category/category.service';
 import { Category } from 'src/app/Model/Category/category';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-subcategory',
@@ -11,19 +13,21 @@ import { Category } from 'src/app/Model/Category/category';
 })
 export class AddSubcategoryComponent implements OnInit {
 
-  public errorMessage : String;
-  public categoryList : Category[];
+  private errorMessage : String;
+  private categoryList : Category[];
 
   constructor(
     private createSubcategoryFormBuilder : FormBuilder,
     private subcategoryService : SubcategoryService,
-    private crudCategory: CategoryService
+    private categoryService: CategoryService,
+    private router : Router
   ) { }
 
-  subcategoryCreateForm = this.createSubcategoryFormBuilder.group({
-    subcategoryCode: ['', [Validators.required]],
-    subcategoryName: ['', [Validators.required]],
-    subcategoryDescription: [''],
+  private subcategoryCreateForm = this.createSubcategoryFormBuilder.group({
+    subcategoryCode: ['', [Validators.required, Validators.maxLength(10)]],
+    subcategoryName: ['', [Validators.required, Validators.maxLength(15)]],
+    subcategoryDescription: ['', [Validators.maxLength(500)]],
+    subcategoryState: [true, [Validators.required]],
     category: ['', [Validators.required]]
   });
 
@@ -35,33 +39,42 @@ export class AddSubcategoryComponent implements OnInit {
     return this.subcategoryCreateForm.get('subcategoryName');
   }
 
+  get subcategoryDescription(){
+    return this.subcategoryCreateForm.get('subcategoryDescription');
+  }
+
   get category(){
     return this.category.get('category');
   }
 
   ngOnInit(){
-    this.crudCategory.getAllCategories().subscribe(
-      data=>{
-        console.log('Success', data);
-        this.categoryList = data;
-      },
-      error=>{
-        console.log('Fail', error);
-      }
-    )
+    this.getAllCategories();
   }
 
   onSubmit(){
     this.subcategoryService.addSubcategory(this.subcategoryCreateForm.value).subscribe(
       data => {
-        console.log('Success', data);
         this.errorMessage = null;
+        this.router.navigateByUrl('/subcategory');
       },
       error => {
-        console.log('Fail', error);
         this.errorMessage = error.error.message;
       }
     )
   }
 
+  getToSubcategoryTable(){
+    this.router.navigateByUrl('/subcategory');
+  }
+
+  getAllCategories(){
+    this.categoryService.getAllCategories().subscribe(
+      data=>{
+        this.categoryList = data;
+      },
+      error=>{
+        this.errorMessage = error.error.message;
+      }
+    )
+  }
 }

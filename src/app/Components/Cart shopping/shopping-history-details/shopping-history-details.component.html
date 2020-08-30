@@ -1,0 +1,36 @@
+<div class="container p-0">
+  <hr>
+  <h2 class="title">Detalles de compra</h2>
+  <hr>
+  <div *ngIf="errorMessage" class="text-center">
+    <label class="text-danger">{{errorMessage}}</label>
+    <hr>
+  </div>
+  <div class="row">
+    <table class="table table-hover ">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Imagen</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Cantidad</th>
+          <!--<th scope="col">Change</th>-->
+          <th scope="col">Precio ($)</th>
+          <th scope="col">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let details of purchaseOrder.orderDetails">
+          <td><img
+              src="{{'data:' + details.product.productImage[0].imageType + ';base64,' + details.product.productImage[0].imageBytes}}"
+              width="75" height="75" class="ml-lg-5 order-1 order-lg-2"></td>
+          <td>{{details.product.productName}}</td>
+          <td>{{details.quantity}}</td>
+          <!--<td><input type="number" placeholder="New quantity" value="cartDetail.quantity"></td>-->
+          <td>{{details.unitPrice}}</td>
+          <td>{{details.totalPrice}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

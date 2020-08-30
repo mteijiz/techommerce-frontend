@@ -1,35 +1,43 @@
 <div class="container ">
     <hr>
-    <h2 class="title">Add Category</h2>
+    <h2 class="title">Agregar categoría</h2>
     <hr>
     <div *ngIf="errorMessage" class="text-center">
       <label class="text-danger">{{errorMessage}}</label>
       <hr>
     </div>
     <form [formGroup]="categoryCreateForm" (ngSubmit)="onSubmit()">
-  
-  
       <div class="form-group row">
-        <label for="categoryCode" class="col-sm-2 col-form-label">Code</label>
+        <label for="categoryCode" class="col-sm-2 col-form-label">Código</label>
         <div class="col-sm-10">
           <input type="text" class="form-control" formControlName="categoryCode">
           <app-validation-messages [validation]="categoryCreateForm.get('categoryCode')"></app-validation-messages>
         </div>
       </div>
       <div class="form-group row">
-        <label for="categoryName" class="col-sm-2 col-form-label">Name</label>
+        <label for="categoryName" class="col-sm-2 col-form-label">Nombre</label>
         <div class="col-sm-10">
           <input class="form-control" type="text" formControlName="categoryName">
           <app-validation-messages [validation]="categoryCreateForm.get('categoryName')"></app-validation-messages>
         </div>
       </div>
       <div class="form-group row">
-        <label for="categoryDescription" class="col-sm-2 col-form-label">Description</label>
+        <label for="productDescription" class="col-sm-2 col-form-label">Activo</label>
         <div class="col-sm-10">
-          <input class="form-control" type="text" formControlName="categoryDescription">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" formControlName="categoryState">
+          </div>
         </div>
       </div>
-      <button class="btn btn-outline-dark " type="submit" [disabled]="!categoryCreateForm.valid">Add</button>
+      <div class="form-group row">
+        <label for="categoryDescription" class="col-sm-2 col-form-label">Descripción</label>
+        <div class="col-sm-10">
+          <textarea class="form-control" type="text" formControlName="categoryDescription"></textarea>
+          <app-validation-messages [validation]="categoryCreateForm.get('categoryDescription')"></app-validation-messages>
+        </div>
+      </div>
+      <button class="btn btn-outline-dark mr-2" type="submit" [disabled]="!categoryCreateForm.valid">Agregar</button>
+      <button class="btn btn-outline-dark ml-2" type="button" (click)="getToCategoryTable()">Atrás</button>
     </form>
     <hr>
   </div>

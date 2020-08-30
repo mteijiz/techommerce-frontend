@@ -9,38 +9,26 @@ import { BrandService } from 'src/app/Service/Brand/brand.service';
 })
 export class BrandTableComponent implements OnInit {
 
-  brandList: Brand[];
-  errorMessage: String;
+  private brandList: Brand[];
+  private errorMessage: String;
 
   constructor(
-    private crudBrand: BrandService
+    private brandService: BrandService
   ) { }
 
   ngOnInit() {
-    this.crudBrand.getAllBrands().subscribe(
+    this.getAllBrandsService();
+  }
+
+  getAllBrandsService(){
+    this.brandService.getAllBrands().subscribe(
       data => {
-        console.log('Success ', data);
         this.brandList = data;
         this.errorMessage = null;
       },
       error => {
-        console.log('Error ', error);
         this.errorMessage = error.error.message;
       }
-
-    )
-  }
-
-  onClick(brand : Brand){
-    this.crudBrand.updateBrandState(brand).subscribe(
-      data=>{
-        console.log('Success', data);
-        this.ngOnInit();
-      },
-      error=>{
-        console.log('Fail', error);
-      }
-      
     )
   }
 

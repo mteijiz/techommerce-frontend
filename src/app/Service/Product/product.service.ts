@@ -7,13 +7,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
-  
-  
+     
   baseUrl = 'http://localhost:8080' + '/products/';
 
   postProductUrl = this.baseUrl + 'add';
   getAllProductsUrl = this.baseUrl + 'getAll';
+  getActiveProductsUrl = this.baseUrl + 'getActive';
   updateProductStateUrl = this.baseUrl + 'updateState';
+  updateProductUrl = this.baseUrl + 'update'; 
+  addVoteToProductUrl = this.baseUrl + 'addVote';
+  getProductByIdUrl = this.baseUrl + 'getById/'
 
   constructor(
     private http: HttpClient
@@ -29,6 +32,22 @@ export class ProductService {
 
   updateProductState(product: Product) {
    return this.http.put<any>(this.updateProductStateUrl, product);
+  }
+
+  getAllActiveProducts() {
+    return this.http.get<Product[]>(this.getActiveProductsUrl);
+  }
+
+  updateProduct(product: Product) {
+    return this.http.put<any>(this.updateProductUrl, product);
+  }
+
+  addVoteToProduct(voteOfProduct: any) {
+    return this.http.put<any>(this.addVoteToProductUrl, voteOfProduct);
+  }
+
+  getProductById(productId: any) {
+    return this.http.get<any>(`${this.getProductByIdUrl}${productId}`);
   }
 
 }

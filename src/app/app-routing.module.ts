@@ -13,59 +13,122 @@ import { ProductTableComponent } from './Components/Product/product-table/produc
 import { AddProductComponent } from './Components/Product/add-product/add-product.component';
 import { UpdateProductComponent } from './Components/Product/update-product/update-product.component';
 import { ProductListComponent } from './Components/Product/product-list/product-list.component';
+import { AdminAuthGuardService } from './Service/AuthGuard/admin-auth-guard.service';
+import { UserAuthGuardService } from './Service/AuthGuard/user-auth-guard.service';
+import { CartComponent } from './Components/Cart shopping/cart/cart.component';
+import { ProductDetailsComponent } from './Components/Product/product-details/product-details.component';
+import { HomeComponent } from './Components/Home/home/home.component';
+import { ShoppingHistoryComponent } from './Components/Cart shopping/shopping-history/shopping-history.component';
+import { CreditCardComponent } from './Components/Cart shopping/credit-card/credit-card.component';
+import { ShoppingHistoryDetailsComponent } from './Components/Cart shopping/shopping-history-details/shopping-history-details.component';
+import { ImageCardListComponent } from './Components/Product/image-card-list/image-card-list.component';
 
 const routes: Routes = [
     {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full'
+    },
+    {
+        path:'home',
+        component: HomeComponent
+    },
+    {
         path: 'brand',
-        component: BrandTableComponent
+        component: BrandTableComponent,
+        canActivate: [AdminAuthGuardService]
     },
     {
         path: 'brand/add-brand',
-        component: AddBrandComponent
+        component: AddBrandComponent,
+        canActivate: [AdminAuthGuardService]
     },
     {
         path: 'brand/update-brand',
-        component: UpdateBrandComponent
+        component: UpdateBrandComponent,
+        canActivate: [AdminAuthGuardService]
     },
     {
         path: 'category',
-        component: CategoryTableComponent
+        component: CategoryTableComponent,
+        canActivate: [AdminAuthGuardService]
     },
     {
         path: 'category/add-category',
-        component: AddCategoryComponent
+        component: AddCategoryComponent,
+        canActivate: [AdminAuthGuardService]
     },
     {
         path: 'category/update-category',
-        component: UpdateCategoryComponent
+        component: UpdateCategoryComponent,
+        canActivate: [AdminAuthGuardService]
     },
     {
         path: 'subcategory',
-        component: SubcategoryTableComponent
+        component: SubcategoryTableComponent,
+        canActivate: [AdminAuthGuardService]
     },
     {
         path: 'subcategory/add-subcategory',
-        component: AddSubcategoryComponent
+        component: AddSubcategoryComponent,
+        canActivate: [AdminAuthGuardService]
     },
     {
         path: 'subcategory/update-subcategory',
-        component: UpdateSubcategoryComponent
+        component: UpdateSubcategoryComponent,
+        canActivate: [AdminAuthGuardService]
     },
     {
         path: 'product',
-        component: ProductTableComponent
+        component: ProductTableComponent,
+        canActivate: [AdminAuthGuardService]
     },
     {
         path: 'product/add-product',
-        component: AddProductComponent
+        component: AddProductComponent,
+        canActivate: [AdminAuthGuardService]
     },
     {
         path: 'product/update-product',
-        component: UpdateProductComponent
+        component: UpdateProductComponent,
+        canActivate: [AdminAuthGuardService]
     },
     {
-        path: 'shop',
+        path: 'product/update-image',
+        component: ImageCardListComponent,
+        canActivate: [AdminAuthGuardService]
+    },
+    {
+        path: 'shop/all-categories',
         component: ProductListComponent
+    },
+    {
+        path: 'shop/:id',
+        component: ProductListComponent
+    },
+    {
+        path: 'cart',
+        component: CartComponent,
+        canActivate: [UserAuthGuardService || AdminAuthGuardService]
+    },
+    {
+        path: 'shop/:id/product-details',
+        component: ProductDetailsComponent
+    },
+    {
+        path: 'cart/buy',
+        component: CreditCardComponent,
+        canActivate: [UserAuthGuardService || AdminAuthGuardService]
+    },
+    {
+        path: 'shopping-history',
+        component: ShoppingHistoryComponent,
+        canActivate: [UserAuthGuardService || AdminAuthGuardService]
+    },
+    {
+        path: 'shopping-history/order-details',
+        component: ShoppingHistoryDetailsComponent,
+        canActivate: [UserAuthGuardService || AdminAuthGuardService]
     }
 ]
 

@@ -2,6 +2,7 @@ import { Brand } from '../Brand/brand';
 import { Category } from '../Category/category';
 import { Subcategory } from '../Subcategory/subcategory';
 import { Image } from '../Image/image';
+import { NumberValueAccessor } from '@angular/forms';
 
 export class Product {
 
@@ -18,5 +19,6 @@ export class Product {
     public productSubcategory : Subcategory;
     public productState : Boolean;
     public productImage : Image[];
+    public productTotalPoints : number;
 
 }

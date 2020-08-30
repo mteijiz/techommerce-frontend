@@ -9,37 +9,26 @@ import { CategoryService } from 'src/app/Service/Category/category.service';
 })
 export class CategoryTableComponent implements OnInit {
 
-  public errorMessage: String;
-  public categoryList: Category[];
+  private errorMessage: String;
+  private categoryList: Category[];
 
   constructor(
-    private crudCategory: CategoryService
+    private categoryService: CategoryService
   ) { }
 
   ngOnInit() {
-    this.crudCategory.getAllCategories().subscribe(
+    this.getCategories();
+  }
+
+  getCategories(){
+    this.categoryService.getAllCategories().subscribe(
       data => {
-        console.log('Success ', data);
         this.categoryList = data;
         this.errorMessage = null;
       },
       error => {
-        console.log('Error ', error);
         this.errorMessage = error.error.message;
       }
-    )
-  }
-
-  onClick(category : Category){
-    this.crudCategory.updateCategoryState(category).subscribe(
-      data=>{
-        console.log('Success', data);
-        this.ngOnInit();
-      },
-      error=>{
-        console.log('Fail', error);
-      }
-      
     )
   }
 

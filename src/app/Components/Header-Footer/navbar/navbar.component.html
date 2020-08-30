@@ -1,6 +1,6 @@
 <div class="container-fluid background font-container">
   <nav class="navbar navbar-expand-lg navbar-dark default-color container">
-    <a class="navbar-brand" href="#">Techcommerce</a>
+    <a class="navbar-brand" routerLink="/home">Techommerce</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#responsiveNavbar"
       aria-controls="responsiveNavbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -8,48 +8,36 @@
     <div class="collapse navbar-collapse font-weight-bolder" id="responsiveNavbar">
       <ul class="navbar-nav ml-auto nav-flex-icons">
         <li class="nav-item" *ngIf="!securityService.keycloak.authenticated">
-          <a class="nav-link waves-effect waves-light" (click)="onRegister()">
-            Register
-            <i class="fas fa-user-plus"></i>
+          <a class="nav-link waves-effect waves-light" (click)="onLogin()">
+            Login
+            <i class="fa fa-sign-in" aria-hidden="true"></i>
           </a>
         </li>
         <li class="nav-item" *ngIf="!securityService.keycloak.authenticated">
-          <a class="nav-link waves-effect waves-light" (click)="onLogin()">
-            Login
-            <i class="fas fa-user-circle"></i>
+          <a class="nav-link waves-effect waves-light" (click)="onRegister()">
+            Registrarse
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
           </a>
         </li>
-        <li class="nav-item" *ngIf="securityService.keycloak.authenticated">
-          <a class="nav-link waves-effect waves-light" (click)="onLogout()">
-            Logout
-            <i class="fas fa-user-circle"></i>
-          </a>
-        </li>
+        
         <li class="nav-item dropdown" *ngIf="securityService.keycloak.authenticated">
           <a class="nav-link dropdown-toggle" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
             {{securityService.keycloak.tokenParsed.email}}
-            <i class="fas fa-user-circle"></i>
+            <i class="fa fa-user-circle" aria-hidden="true"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="profileDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <a class="dropdown-item" routerLink="/shopping-history">Historial de compras</a>
           </div>
         </li>
-        <li class="nav-item dropdown" >
-          <a class="nav-link dropdown-toggle" id="settingDropdown" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
-            Setting
-            <i class="fas fa-cog"></i>
+        <li class="nav-item" *ngIf="securityService.keycloak.authenticated">
+          <a class="nav-link waves-effect waves-light" (click)="onLogout()">
+            Logout
+            <i class="fa fa-sign-out" aria-hidden="true"></i>
           </a>
-          <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="settingDropdown">
-            <a class="dropdown-item" routerLink="brand" routerLinkActive="active">Brand</a>
-            <a class="dropdown-item" routerLink="category" routerLinkActive="active">Category</a>
-            <a class="dropdown-item" routerLink="subcategory" routerLinkActive="active">Subcategory</a>
-            <a class="dropdown-item" routerLink="product" routerLinkActive="active">Product</a>
-          </div>
         </li>
+       
+        
       </ul>
       
     </div>

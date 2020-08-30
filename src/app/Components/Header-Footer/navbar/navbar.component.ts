@@ -8,7 +8,9 @@ import { KeycloakSecurityService } from 'src/app/Service/Keycloak/keycloak-secur
 })
 export class NavbarComponent implements OnInit{
 
-  constructor(public securityService:KeycloakSecurityService) { }
+  constructor(
+    private securityService:KeycloakSecurityService
+  ) { }
   
   ngOnInit(){
     
@@ -26,8 +28,6 @@ export class NavbarComponent implements OnInit{
     this.securityService.keycloak.register();
   }
 
-  isAppManager(){
-    return this.securityService.keycloak.hasRealmRole("app-manager");
-  }
+  
 
 }

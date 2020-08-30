@@ -1,0 +1,8 @@
+<form [formGroup]="cartForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <input type="number" value="{{cartDetail.quantity}}" class="form-control w-25" formControlName="newQuantity">
+    <app-validation-messages [validation]="cartForm.get('newQuantity')"></app-validation-messages>
+    <button [disabled]="!cartForm.valid" class="btn btn-outline-dark btn-sm" type="submit"><i class="fa fa-cart-plus"
+        aria-hidden="true"></i></button>
+  </div>
+</form>

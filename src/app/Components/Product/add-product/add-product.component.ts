@@ -9,7 +9,8 @@ import { SubcategoryService } from 'src/app/Service/Subcategory/subcategory.serv
 import { FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImageService } from 'src/app/Service/Image/image.service';
-
+import { Router } from '@angular/router';
+import { ValidationService } from '../../../Service/Validations/validation.service'
 
 
 @Component({
@@ -19,28 +20,31 @@ import { ImageService } from 'src/app/Service/Image/image.service';
 })
 export class AddProductComponent implements OnInit {
 
-  public errorMessage: String;
-  public brandList: Brand[];
-  public categoryList: Category[];
-  public subcategoryList: Subcategory[];
-  public subcategoryListFiltered: Subcategory[];
-  public productImages: File[] = [];
+  private errorMessage: String;
+  private brandList: Brand[];
+  private categoryList: Category[];
+  private subcategoryList: Subcategory[];
+  private subcategoryListFiltered: Subcategory[];
+  private productImages: File[] = [];
+  private mainProductImage : File[] = [];
 
   constructor(
-    private crudProduct: ProductService,
-    private crudBrand: BrandService,
-    private crudCategory: CategoryService,
-    private crudSubcategory: SubcategoryService,
+    private productService: ProductService,
+    private brandService: BrandService,
+    private categoryService: CategoryService,
+    private subcategoryService: SubcategoryService,
     private createProductFormBuilder: FormBuilder,
-    private crudProductimage: ImageService
+    private imageService: ImageService,
+    private router : Router
   ) { }
 
-  productCreateForm = this.createProductFormBuilder.group({
-    productCode: ['', [Validators.required]],
-    productName: ['', [Validators.required]],
-    productDescription: [''],
-    productPrice: ['', [Validators.required, Validators.min(0)]],
-    productQuantity: ['', [Validators.required, Validators.min(0)]],
+  private productCreateForm = this.createProductFormBuilder.group({
+    productCode: ['', [Validators.required, Validators.maxLength(10)]],
+    productName: ['', [Validators.required, Validators.maxLength(15)]],
+    productDescription: ['', [Validators.maxLength(1000)]],
+    productPrice: ['', [Validators.required, Validators.min(0), ValidationService.decimalValidator]],
+    productQuantity: ['', [Validators.required, Validators.min(0), ValidationService.noDecimalValidator]],
+    productState: [true, [Validators.required]],
     productBrand: ['', [Validators.required]],
     productCategory: ['', [Validators.required]],
     productSubcategory: ['', [Validators.required]]
@@ -72,7 +76,15 @@ export class AddProductComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.crudBrand.getAllBrands().subscribe(
+    
+    this.getAllBrands();
+    this.getAllCategories();
+    this.getAllSubcategories();
+    
+  }
+
+  getAllBrands(){
+    this.brandService.getAllBrands().subscribe(
       data => {
         console.log('Success', data);
         this.brandList = data;
@@ -81,7 +93,10 @@ export class AddProductComponent implements OnInit {
         console.log('Fail', error);
       }
     );
-    this.crudCategory.getAllCategories().subscribe(
+  }
+
+  getAllCategories(){
+    this.categoryService.getAllCategories().subscribe(
       data => {
         console.log('Success', data);
         this.categoryList = data;
@@ -90,7 +105,10 @@ export class AddProductComponent implements OnInit {
         console.log('Fail', error);
       }
     );
-    this.crudSubcategory.getAllsubcategories().subscribe(
+  }
+
+  getAllSubcategories(){
+    this.subcategoryService.getAllSubcategories().subscribe(
       data => {
         console.log('Success', data);
         this.subcategoryList = data;
@@ -111,31 +129,52 @@ export class AddProductComponent implements OnInit {
     console.log(this.productImages);
   }
 
+  onMainFileChange(event) {
+    if (event.target.files && event.target.files[0]) {
+      var imagesAmount = event.target.files.length;
+      for (let i = 0; i < imagesAmount; i++) {
+        this.mainProductImage.push(event.target.files[i])
+      }
+    }
+    console.log(this.mainProductImage);
+  }
+
   onSubmit() {
+    const mainImageFormData = new FormData();
     const imageFormData = new FormData();
+    for(let productImage of this.mainProductImage){
+      mainImageFormData.append('image', productImage);
+    }
     for (let productImage of this.productImages) {
       console.log(productImage);
       imageFormData.append('images', productImage);
     }
-    console.log(imageFormData);
-    this.crudProduct.addProduct(this.productCreateForm.value).subscribe(
+    this.productService.addProduct(this.productCreateForm.value).subscribe(
       data => {
-        console.log('Success', data);
-        this.crudProductimage.uploadImage(imageFormData, data.productId).
+        this.imageService.uploadMainImage(mainImageFormData, data.productId).
           subscribe(
             data => {
-              console.log('Success', data);
+              console.log('Success');
             },
             error => {
-              console.log('Fail image log: ', error);
+              console.log('Fail');
               this.errorMessage = error.error.message;
-              console.log(this.errorMessage);
+            }
+          )
+        this.imageService.uploadImage(imageFormData, data.productId).
+          subscribe(
+            data => {
+              console.log('Success');
+            },
+            error => {
+              console.log('Fail');
+              this.errorMessage = error.error.message;
             }
           )
         this.errorMessage = null;
+        this.router.navigateByUrl('/product');
       },
       error => {
-        console.log('Fail', error);
         this.errorMessage = error.error.message;
       }
     )
@@ -143,6 +182,10 @@ export class AddProductComponent implements OnInit {
 
   onSelect(categoryId: number) {
     this.subcategoryListFiltered = this.subcategoryList.filter((subcategoryList) => subcategoryList.category.categoryId == categoryId);
+  }
+
+  getToProductTable(){
+    this.router.navigateByUrl('/product');
   }
 
 }

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { SubcategoryService } from 'src/app/Service/Subcategory/subcategory.service';
 import { Subcategory } from 'src/app/Model/Subcategory/subcategory';
 import { Category } from 'src/app/Model/Category/category';
 import { CategoryService } from 'src/app/Service/Category/category.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-update-subcategory',
@@ -12,18 +13,18 @@ import { CategoryService } from 'src/app/Service/Category/category.service';
 })
 export class UpdateSubcategoryComponent implements OnInit {
 
-  public errorMessage : String;
-  public subcategory: Subcategory;
-  public example = true;
-  public categoryList : Category[];
+  private errorMessage : String;
+  private subcategory: Subcategory;
+  private categoryList : Category[] = new Array();
 
   constructor(
     private updateSubcategoryFormBuilder : FormBuilder,
     private subcategoryService : SubcategoryService,
-    private crudCategory : CategoryService
+    private crudCategory : CategoryService,
+    private router : Router
   ) { }
 
-  subcategoryUpdateForm;
+  private subcategoryUpdateForm : FormGroup;
 
   get subcategoryId(){
     return this.subcategoryUpdateForm.get('subcategoryId');
@@ -50,35 +51,63 @@ export class UpdateSubcategoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.subcategory = history.state;
-    this.subcategoryUpdateForm = this.updateSubcategoryFormBuilder.group({
-      subcategoryId: [this.subcategory.subcategoryId, [Validators.required]],
-      subcategoryCode: [this.subcategory.subcategoryCode, [Validators.required]],
-      subcategoryName: [this.subcategory.subcategoryName, [Validators.required]],
-      subcategoryDescription: [this.subcategory.subcategoryDescription],
-      subcategoryState: [this.subcategory.subcategoryState, Validators.required],
-      category: [this.subcategory.category]
-    });
-    this.crudCategory.getAllCategories().subscribe(
-      data=>{
-        console.log('Success', data);
-        this.categoryList = data;
-      },
-      error=>{
-        console.log('Fail', error);
-      }
-    )
+    if(localStorage.getItem("subcategory") != null)
+      this.getLocalStorage();
+    else{
+      this.subcategory = history.state;
+      localStorage.setItem("subcategory", JSON.stringify(history.state));
+    }
+    this.loadCategoryAndForm();
+    
+  }
+
+  getLocalStorage(){
+    this.subcategory = JSON.parse(localStorage.getItem("subcategory"));
+  }
+
+  ngOnDestroy(){
+    localStorage.removeItem("subcategory");
   }
 
   onSubmit(){
     this.subcategoryService.updateSubcategory(this.subcategoryUpdateForm.value).subscribe(
       data => {
-        console.log('Success', data)
+        this.errorMessage = null;
+        this.ngOnDestroy();
+        this.router.navigateByUrl('/subcategory');
       },
       error => {
-        console.log('Error', error)
+        this.errorMessage = error.error.message;
       }
     )
+  }
+
+  getToSubcategoryTable(){
+    this.router.navigateByUrl('/subcategory');
+  }
+
+  loadCategoryAndForm(){
+    this.crudCategory.getAllCategories().subscribe(
+      data=>{
+        this.categoryList = data;
+        for(let i = 0; i < this.categoryList.length; i++){
+          if(this.categoryList[i].categoryId === this.subcategory.category.categoryId){
+            this.subcategoryUpdateForm.patchValue({category: this.categoryList[i]});
+          }
+        }
+      },
+      error=>{
+        console.log('Fail', error);
+      }
+    )
+    this.subcategoryUpdateForm = this.updateSubcategoryFormBuilder.group({
+      subcategoryId: [this.subcategory.subcategoryId, [Validators.required]],
+      subcategoryCode: [this.subcategory.subcategoryCode, [Validators.required, Validators.maxLength(10)]],
+      subcategoryName: [this.subcategory.subcategoryName, [Validators.required, Validators.maxLength(15)]],
+      subcategoryDescription: [this.subcategory.subcategoryDescription, [Validators.maxLength(100)]],
+      subcategoryState: [this.subcategory.subcategoryState, Validators.required],
+      category: ['', [Validators.required]]
+    });
   }
 
 }

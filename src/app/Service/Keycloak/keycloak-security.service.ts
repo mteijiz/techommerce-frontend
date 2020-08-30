@@ -7,11 +7,11 @@ declare var Keycloak: any;
 })
 export class KeycloakSecurityService {
 
-  public keycloak:KeycloakInstance;
+  public keycloak: KeycloakInstance;
 
   constructor() { }
 
-  async init(){
+  async init() {
     console.log('INIT : Service keycloak security ');
     this.keycloak = new Keycloak({
       url: 'http://localhost:8180/auth',
@@ -20,8 +20,26 @@ export class KeycloakSecurityService {
     });
     await this.keycloak.init({
       //onLoad:'login-required'
-      onLoad:'check-sso'
-    })
+      onLoad: 'check-sso'
+    }).success((auth) => {
+      console.log("auth: ", auth);
+      
+      localStorage.setItem("token", this.keycloak.token);
+      localStorage.setItem("refresh-token", this.keycloak.refreshToken);
+      setTimeout(() => {
+        this.keycloak.updateToken(60).success((refreshed) => {
+          if (refreshed) {
+            console.debug('Token refreshed' + refreshed);
+          } else {
+          }
+        }).error(() => {
+          console.error('Failed to refresh token');
+        });
+      }, 40000)
+    }).error(() => {
+      console.error("Authenticated Failed");
+    });
     console.log(this.keycloak.token);
   }
+
 }

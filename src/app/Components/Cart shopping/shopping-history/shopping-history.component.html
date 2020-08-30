@@ -1,0 +1,36 @@
+<div class="container p-0">
+  <hr>
+  <h2 class="title">Historial de compras</h2>
+  <hr>
+  <div *ngIf="errorMessage" class="text-center">
+    <label class="text-danger">{{errorMessage}}</label>
+    <hr>
+  </div>
+  <div class="row">
+    <table class="table table-hover ">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Fecha</th>
+          <th scope="col">Pago</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Total</th>
+          <th scope="col">Visualizar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let purchaseOrder of purchaseOrders">
+          <td>{{purchaseOrder.purchaseDate}}</td>
+          <td>{{purchaseOrder.ccNumberFourLastDigits}}</td>
+          <td>{{purchaseOrder.quantity}}</td>
+          <td>{{purchaseOrder.total}}</td>
+          <td>
+            <a routerLink="order-details" routerLinkActive="active" [state]="purchaseOrder"
+              class="btn btn-outline-dark mr-1 btn-sm">
+              Detalles
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -7,6 +7,7 @@ import { Brand } from 'src/app/Model/Brand/brand';
   providedIn: 'root'
 })
 export class BrandService {
+  
 
   baseUrl = 'http://localhost:8080'+'/brands/';
 
@@ -14,6 +15,7 @@ export class BrandService {
   postUrl = this.baseUrl + 'add';
   updateUrl = this.baseUrl + 'update';
   updateStateUrl = this.baseUrl + 'changeStatus';
+  getActiveUrl = this.baseUrl + 'getActive';
 
   constructor(private http : HttpClient) { }
 
@@ -31,5 +33,9 @@ export class BrandService {
 
   updateBrandState(brandToUpdate) : Observable<any>{
     return this.http.put<any>(this.updateStateUrl, brandToUpdate);
+  }
+
+  getAllActiveBrands() {
+    return this.http.get<Brand[]>(this.getActiveUrl);
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { BrandService } from 'src/app/Service/Brand/brand.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-brand',
@@ -9,17 +10,19 @@ import { BrandService } from 'src/app/Service/Brand/brand.service';
 })
 export class AddBrandComponent implements OnInit {
 
-  public errorMessage : String;
+  private errorMessage : String;
 
   constructor(
     private createBrandFormBuilder : FormBuilder,
-    private brandService : BrandService
+    private brandService : BrandService,
+    private router : Router
   ) { }
 
-  brandCreateForm = this.createBrandFormBuilder.group({
-    brandCode: ['', [Validators.required]],
-    brandName: ['', [Validators.required]],
-    brandDescription: ['']
+  private brandCreateForm = this.createBrandFormBuilder.group({
+    brandCode: ['', [Validators.required, Validators.maxLength(10)]],
+    brandName: ['', [Validators.required, Validators.maxLength(15)]],
+    brandDescription: ['', [Validators.maxLength(500)]],
+    brandState: [true, [Validators.required]]
   });
 
   get brandCode(){
@@ -30,20 +33,27 @@ export class AddBrandComponent implements OnInit {
     return this.brandCreateForm.get('brandName');
   }
 
+  get brandDescription(){
+    return this.brandCreateForm.get('brandDescription');
+  }
+
   ngOnInit() {
   }
 
   onSubmit(){
     this.brandService.addBrand(this.brandCreateForm.value).subscribe(
       data => {
-        console.log('Success', data);
         this.errorMessage = null;
+        this.router.navigateByUrl('/brand');
       },
       error => {
-        console.log('Fail', error);
         this.errorMessage = error.error.message;
       }
     )
+  }
+
+  goToBrandTable(){
+    this.router.navigateByUrl('/brand');
   }
 
 }

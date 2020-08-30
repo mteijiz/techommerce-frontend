@@ -1,0 +1,46 @@
+
+<div class="container p-5">
+  <form [formGroup]="creditCardForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-6"> <span>Datos tarjeta de crédito</span> </div>
+      <div class="col-md-6 text-right" style="margin-top: -5px;">
+        <img src="https://img.icons8.com/color/36/000000/visa.png">
+        <img src="https://img.icons8.com/color/36/000000/mastercard.png">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="cc-number" class="col-sm-2 col-form-label">Numero de tarjeta</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="•••• •••• •••• ••••" formControlName="ccNumber">
+        <app-validation-messages [validation]="creditCardForm.get('ccNumber')"></app-validation-messages>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="cc-number" class="col-sm-2 col-form-label">Vencimiento de tarjeta</label>
+      <div class="col-sm-5">
+        <input type="text" class="form-control" placeholder="Month" formControlName="ccExpMonth">
+        <app-validation-messages [validation]="creditCardForm.get('ccExpMonth')"></app-validation-messages>
+      </div>
+      <div class="col-sm-5">
+        <input type="text" class="form-control" placeholder="Year" formControlName="ccExpYear">
+        <app-validation-messages [validation]="creditCardForm.get('ccExpYear')"></app-validation-messages>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="cc-number" class="col-sm-2 col-form-label">CVC de tarjeta</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" formControlName="ccCvc">
+        <app-validation-messages [validation]="creditCardForm.get('ccCvc')"></app-validation-messages>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="cc-number" class="col-sm-2 col-form-label">Nombre del dueño de la tarjeta</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" formControlName="ccHolderName">
+      </div>
+    </div>
+    <div class="form-group"> 
+      <input value="Realizar pago" type="submit" class="btn btn-dark btn-lg form-control"  [disabled]="!creditCardForm.valid">
+    </div>
+  </form>
+</div>

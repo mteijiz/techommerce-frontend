@@ -9,23 +9,25 @@ import { ProductService } from 'src/app/Service/Product/product.service';
 })
 export class ProductTableComponent implements OnInit {
 
-  public errorMessage: String;
-  public productList: Product[];
+  private errorMessage: String;
+  private productList: Product[];
   
 
   constructor(
-    private crudProduct: ProductService
+    private productService: ProductService
   ) { }
 
   ngOnInit() {
-    this.crudProduct.getAllProducts().subscribe(
+    this.getAllProducts();
+  }
+
+  getAllProducts(){
+    this.productService.getAllProducts().subscribe(
       data => {
-        console.log('Success ', data);
         this.productList = data;
         this.errorMessage = null;
       },
       error => {
-        console.log('Error ', error);
         this.errorMessage = error.error.message;
       }
     )
@@ -33,15 +35,12 @@ export class ProductTableComponent implements OnInit {
 
   onClick(product : Product){
     console.log(product);
-    this.crudProduct.updateProductState(product).subscribe(
+    this.productService.updateProductState(product).subscribe(
       data=>{
-        console.log('Success', data);
         this.ngOnInit();
       },
       error=>{
-        console.log('Fail', error);
       }
-      
     )
   }
 

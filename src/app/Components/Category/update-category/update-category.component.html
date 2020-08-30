@@ -1,49 +1,45 @@
 <div class="container ">
   <hr>
-  <h2 class="title">Update Subcategory</h2>
+  <h2 class="title">Actualizar categoría</h2>
   <hr>
   <div *ngIf="errorMessage" class="text-center">
     <label class="text-danger">{{errorMessage}}</label>
     <hr>
   </div>
-  <form [formGroup]="subcategoryUpdateForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="categoryUpdateForm" (ngSubmit)="onSubmit()">
 
 
     <div class="form-group row">
-      <label for="subcategoryCode" class="col-sm-2 col-form-label">Code</label>
+      <label for="categoryCode" class="col-sm-2 col-form-label">Código</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" formControlName="subcategoryCode">
-        <app-validation-messages [validation]="subcategoryUpdateForm.get('subcategoryCode')"></app-validation-messages>
+        <input type="text" class="form-control" formControlName="categoryCode">
+        <app-validation-messages [validation]="categoryUpdateForm.get('categoryCode')"></app-validation-messages>
       </div>
     </div>
     <div class="form-group row">
-      <label for="subcategoryName" class="col-sm-2 col-form-label">Name</label>
+      <label for="categoryName" class="col-sm-2 col-form-label">Nombre</label>
       <div class="col-sm-10">
-        <input class="form-control" type="text" formControlName="subcategoryName">
-        <app-validation-messages [validation]="subcategoryUpdateForm.get('subcategoryName')"></app-validation-messages>
+        <input class="form-control" type="text" formControlName="categoryName">
+        <app-validation-messages [validation]="categoryUpdateForm.get('categoryName')"></app-validation-messages>
       </div>
     </div>
     <div class="form-group row">
-      <label for="subcategoryDescription" class="col-sm-2 col-form-label">Description</label>
+      <label for="productDescription" class="col-sm-2 col-form-label">Activo</label>
       <div class="col-sm-10">
-        <input class="form-control" type="text" formControlName="subcategoryDescription">
-      </div>
-    </div>
-    <div class="form-group row" *ngIf="subcategory.subcategoryState else otherSubcategoryState">
-      <label for="subcategoryState" class="col-sm-2 col-form-label">State</label>
-      <div class="col-sm-10">
-        <input class="form-control" type="text" disabled value="ACTIVE">
-      </div>
-    </div>
-    <ng-template #otherSubcategoryState>
-      <div class="form-group row">
-        <label for="subcategoryState" class="col-sm-2 col-form-label">State</label>
-        <div class="col-sm-10">
-          <input class="form-control" type="text" disabled value="INACTIVE">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" formControlName="categoryState">
         </div>
       </div>
-    </ng-template>
-    <button class="btn btn-outline-dark " type="submit" [disabled]="!subcategoryUpdateForm.valid">Update</button>
+    </div>
+    <div class="form-group row">
+      <label for="categoryDescription" class="col-sm-2 col-form-label">Descipción</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" type="text" formControlName="categoryDescription"></textarea>
+        <app-validation-messages [validation]="categoryUpdateForm.get('categoryDescription')"></app-validation-messages>
+      </div>
+    </div>
+    <button class="btn btn-outline-dark mr-2" type="submit" [disabled]="!categoryUpdateForm.valid">Actualizar</button>
+    <button class="btn btn-outline-dark ml-2" type="button" (click)="getToCategoryTable()">Atras</button>
   </form>
   <hr>
 </div>

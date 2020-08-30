@@ -1,35 +1,43 @@
 <div class="container ">
   <hr>
-  <h2 class="title">Add Brand</h2>
+  <h2 class="title">Agregar marca</h2>
   <hr>
   <div *ngIf="errorMessage" class="text-center">
     <label class="text-danger">{{errorMessage}}</label>
     <hr>
   </div>
   <form [formGroup]="brandCreateForm" (ngSubmit)="onSubmit()">
-
-
     <div class="form-group row">
-      <label for="brandCode" class="col-sm-2 col-form-label">Code</label>
+      <label for="brandCode" class="col-sm-2 col-form-label">Codigo</label>
       <div class="col-sm-10">
         <input type="text" class="form-control" formControlName="brandCode">
         <app-validation-messages [validation]="brandCreateForm.get('brandCode')"></app-validation-messages>
       </div>
     </div>
     <div class="form-group row">
-      <label for="brandName" class="col-sm-2 col-form-label">Name</label>
+      <label for="brandName" class="col-sm-2 col-form-label">Nombre</label>
       <div class="col-sm-10">
         <input class="form-control" type="text" formControlName="brandName">
         <app-validation-messages [validation]="brandCreateForm.get('brandName')"></app-validation-messages>
       </div>
     </div>
     <div class="form-group row">
-      <label for="brandDescription" class="col-sm-2 col-form-label">Description</label>
+      <label for="productDescription" class="col-sm-2 col-form-label">Activo</label>
       <div class="col-sm-10">
-        <input class="form-control" type="text" formControlName="brandDescription">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" formControlName="brandState">
+        </div>
       </div>
     </div>
-    <button class="btn btn-outline-dark " type="submit" [disabled]="!brandCreateForm.valid">Add</button>
+    <div class="form-group row">
+      <label for="brandDescription" class="col-sm-2 col-form-label">Descripción</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" type="text" formControlName="brandDescription"></textarea>
+        <app-validation-messages [validation]="brandCreateForm.get('brandDescription')"></app-validation-messages>
+      </div>
+    </div>
+      <button class="btn btn-outline-dark mr-2" type="submit" [disabled]="!brandCreateForm.valid">Agregar</button>
+      <button class="btn btn-outline-dark ml-2" type="button" (click)="goToBrandTable()">Atrás</button>
   </form>
   <hr>
 </div>

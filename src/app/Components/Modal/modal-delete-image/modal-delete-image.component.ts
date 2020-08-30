@@ -9,25 +9,23 @@ import { ImageService } from 'src/app/Service/Image/image.service';
 })
 export class ModalDeleteImageComponent implements OnInit {
 
-  @Input() public image;
+  @Input() private image;
 
   constructor(
-    public activeModal: NgbActiveModal,
-    private crud_image: ImageService
+    private activeModal: NgbActiveModal,
+    private imageService: ImageService
   ) { }
 
   ngOnInit() {
   }
 
   onSubmit() {
-    this.crud_image.deleteImage(this.image.imageId)
+    this.imageService.deleteImage(this.image.imageId)
       .subscribe(
         data => {
-          console.log('Success!', data);
           this.activeModal.close('Modal Closed');
         },
         error => {
-          console.log('Fail', error);
           this.activeModal.close('Modal Closed');
         }
       )

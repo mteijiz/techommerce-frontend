@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Brand } from 'src/app/Model/Brand/brand';
 import { BrandService } from 'src/app/Service/Brand/brand.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-update-brand',
@@ -10,16 +11,16 @@ import { BrandService } from 'src/app/Service/Brand/brand.service';
 })
 export class UpdateBrandComponent implements OnInit {
 
-  public errorMessage : String;
-  public brand: Brand;
-  public example = true;
+  private errorMessage : String;
+  private brand: Brand;
 
   constructor(
     private updateBrandFormBuilder : FormBuilder,
-    private brandService : BrandService
+    private brandService : BrandService,
+    private router : Router
   ) { }
 
-  brandUpdateForm;
+  private brandUpdateForm;
 
   get brandId(){
     return this.brandUpdateForm.get('brandId');
@@ -42,25 +43,49 @@ export class UpdateBrandComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.brand = history.state;
-    this.brandUpdateForm = this.updateBrandFormBuilder.group({
-      brandId: [this.brand.brandId, [Validators.required]],
-      brandCode: [this.brand.brandCode, [Validators.required]],
-      brandName: [this.brand.brandName, [Validators.required]],
-      brandDescription: [this.brand.brandDescription],
-      brandState: [this.brand.brandState, Validators.required]
-    });
+    if(localStorage.getItem("brand") != null)
+      this.getLocalStorage();
+    else{
+      this.brand = history.state;
+      localStorage.setItem("brand", JSON.stringify(history.state));
+    }
+    this.setBrandUpdateForm();
+    
+  }
+
+  getLocalStorage(){
+    this.brand = JSON.parse(localStorage.getItem("brand"));
+  }
+
+  ngOnDestroy(){
+    localStorage.removeItem("brand");
   }
 
   onSubmit(){
     this.brandService.updateBrand(this.brandUpdateForm.value).subscribe(
       data => {
-        console.log('Success', data)
+        this.errorMessage = null;
+        this.ngOnDestroy();
+        this.router.navigateByUrl('/brand');
       },
       error => {
-        console.log('Error', error)
+        this.errorMessage = error.error.message;
       }
     )
+  }
+
+  getToBrandTable(){
+    this.router.navigateByUrl('/brand');
+  }
+
+  setBrandUpdateForm(){
+    this.brandUpdateForm = this.updateBrandFormBuilder.group({
+      brandId: [this.brand.brandId, [Validators.required]],
+      brandCode: [this.brand.brandCode, [Validators.required, Validators.maxLength(10)]],
+      brandName: [this.brand.brandName, [Validators.required, Validators.maxLength(15)]],
+      brandDescription: [this.brand.brandDescription, [Validators.maxLength(500)]],
+      brandState: [this.brand.brandState, Validators.required]
+    });
   }
 
 }

@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 })
 export class SubcategoryService {
   
-
   baseUrl = 'http://localhost:8080' + '/subcategories/';
 
   getAllSubcategoriesUrl = this.baseUrl + 'getAll/';
@@ -16,12 +15,13 @@ export class SubcategoryService {
   changeStateSubcategoryUrl = this.baseUrl + 'updateState/';
   updateSubcategoryUrl = this.baseUrl + 'update/';
   getSubcategoriesByCategoryUrl = this.baseUrl + 'getByCategory/';
+  getActiveSubcategoriesUrl = this.baseUrl + 'getActive';
 
   constructor(
     private http : HttpClient
   ) { }
 
-  getAllsubcategories() : Observable<any>{
+  getAllSubcategories() : Observable<any>{
     return this.http.get<Subcategory[]>(this.getAllSubcategoriesUrl);
   }
 
@@ -39,5 +39,9 @@ export class SubcategoryService {
   
   getSubcategoriesByCategory(categoryId: any): Observable<any> {
    return this.http.get<Subcategory[]>(`${this.getSubcategoriesByCategoryUrl}${categoryId}`);
+  }
+
+  getAllActiveSubcategories() {
+    return this.http.get<Subcategory[]>(this.getActiveSubcategoriesUrl);
   }
 }

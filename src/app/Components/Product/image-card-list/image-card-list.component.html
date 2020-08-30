@@ -1,8 +1,51 @@
-<div class="row mx-auto">
-  <div class="card mx-2 my-4" style="width: 15rem;" *ngFor="let image of images">
-    <img src="{{'data:' + image.imageType + ';base64,' + image.imageBytes}}" style="width: 250px; height: 250px;" class="mx-auto d-block">
-    <div class="card-body">
-      <button href="#" class="btn" (click)="openImageDeleteFormModal(image)">Delete</button>
+<div class="container">
+  <hr>
+  <h2 class="title">Imagénes de {{product.productName}}</h2>
+  <hr>
+  <div *ngIf="errorMessage" class="text-center">
+    <label class="text-danger">{{errorMessage}}</label>
+    <hr>
+  </div>
+  <div class="form-group row">
+    <label for="file" class="col-sm-2 col-form-label">Imagen principal</label>
+    <div class="col-sm-10">
+      <input type="file" class="form-control" (change)="onMainFileChange($event)">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="file" class="col-sm-2 col-form-label">Imagenes</label>
+    <div class="col-sm-10">
+      <input type="file" class="form-control" multiple (change)="onFileChange($event)">
+    </div>
+  </div>
+  <button class="btn btn-outline-dark " type="submit" [disabled]="newMainProductImage.length<=0 && newProductImageToUpload.length<=0" (click)="onSubmit()">Actualizar</button>
+  <button class="btn btn-outline-dark ml-2" type="button" (click)="getToProductTable()">Atrás</button>
+  <div class="row mx-auto">
+    <div *ngFor="let image of product.productImage">
+      <div class="card mx-2 my-4" style="width: 15rem;" *ngIf="image.imageId != null">
+        <img src="{{'data:' + image.imageType + ';base64,' + image.imageBytes}}" style="max-height: 250px;"
+          class="mx-auto d-block w-100">
+        <div class="card-body">
+          <div *ngIf="image.isMainimage != null && image.isMainimage; else buttonMainImage">
+            <div class="row justify-content-center my-2">
+              <span>Imagen principal</span>
+            </div>
+            <div class="row justify-content-center">
+              <button class="btn btn-outline-dark ml-2 btn-sm" disabled>Nueva principal</button>
+              <button class="btn btn-outline-dark ml-2 btn-sm" (click)="openImageDeleteFormModal(image)">Borrar</button>
+            </div>
+          </div>
+          <ng-template #buttonMainImage>
+            <div class="row justify-content-center my-2">
+              <span>Imagen secundaria</span>
+            </div>
+            <div class="row justify-content-center">
+              <button class="btn btn-outline-dark ml-2 btn-sm" (click)="changeMainImage(image)">Nueva principal</button>
+              <button class="btn btn-outline-dark ml-2 btn-sm" (click)="openImageDeleteFormModal(image)">Borrar</button>
+            </div>
+          </ng-template>
+        </div>
+      </div>
     </div>
   </div>
 </div>
