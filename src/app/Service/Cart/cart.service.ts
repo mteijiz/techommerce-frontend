@@ -40,6 +40,7 @@ export class CartService {
   deleteProductFromCart(cartDetailId: any) {
     return this.http.delete<any>(`${this.deleteProductFromCartUrl}${cartDetailId}`).pipe(
       tap(() => {
+        console.log("Go to update navbar...");
         this.refreshCartValue.next();
       })
     );

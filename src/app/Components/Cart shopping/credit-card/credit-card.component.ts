@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CartDetails } from 'src/app/Model/CartDetails/cart-details';
 import { PurchaseService } from 'src/app/Service/Purchase/purchase.service';
 import { error } from 'protractor';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-credit-card',
@@ -11,10 +12,13 @@ import { error } from 'protractor';
 })
 export class CreditCardComponent implements OnInit {
 
+  private ccNumberComplete;
+
   constructor(
     private creditCardFormBuilder: FormBuilder,
     private cartDetailsFormBuilder: FormBuilder,
-    private purchaseService : PurchaseService
+    private purchaseService : PurchaseService,
+    private router : Router
   ) { }
 
   private productsPurchased : CartDetails [];
@@ -49,7 +53,7 @@ export class CreditCardComponent implements OnInit {
   }
 
   onSubmit(){
-    this.purchaseService.addPurchase(this.creditCardForm.value).subscribe(
+    this.purchaseService.addPurchase().subscribe(
       data => {
         console.log(data);
       },
@@ -59,6 +63,8 @@ export class CreditCardComponent implements OnInit {
     )
   }
 
-  
+  goToCartTable(){
+    this.router.navigateByUrl('/cart');
+  }
 
 }

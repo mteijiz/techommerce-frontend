@@ -1,4 +1,4 @@
-<div class="container p-0">
+<div class="container">
   <hr>
   <h2 class="title">Carrito</h2>
   <hr>
@@ -6,46 +6,42 @@
     <label class="text-danger">{{errorMessage}}</label>
     <hr>
   </div>
-  <div class="row">
-      <table class="table table-hover ">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Imagen</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Cantidad</th>
-            <!--<th scope="col">Change</th>-->
-            <th scope="col">Precio ($)</th>
-            <th scope="col">Total</th>
-            <th scope="col">Borrar</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let cartDetail of cartDetails">
-            <td><img
-                src="{{'data:' + cartDetail.product.productImage[0].imageType + ';base64,' + cartDetail.product.productImage[0].imageBytes}}"
-                width="75" height="75" class="ml-lg-5 order-1 order-lg-2"></td>
-            <td>{{cartDetail.product.productName}}</td>
-            <td><app-cart-product-form [cartDetail]="cartDetail"></app-cart-product-form></td>
-            <!--<td><input type="number" placeholder="New quantity" value="cartDetail.quantity"></td>-->
-            <td>{{cartDetail.unitPrice}}</td>
-            <td>{{cartDetail.totalPrice}}</td>
-            <td><button class="btn btn-outline-dark btn-sm" (click)="deleteProductFromCart(cartDetail.cartDetailId)"><i
-                  class="fa fa-minus" aria-hidden="true"></i>
-              </button></td>
-          </tr>
-          <tr>
-            <td><span>Precio total: </span></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>{{totalAmount}}</td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-    
-  </div>
+    <table class="table table-hover table-responsive-sm">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Imagen</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Total</th>
+          <th scope="col">Borrar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cartDetail of cartDetails">
+          <td><img
+              src="{{'data:' + cartDetail.product.productImage[0].imageType + ';base64,' + cartDetail.product.productImage[0].imageBytes}}"
+              width="75" height="75" class="ml-lg-5 order-1 order-lg-2"></td>
+          <td>{{cartDetail.product.productName}}</td>
+          <td>
+            <app-cart-product-form [cartDetail]="cartDetail"></app-cart-product-form>
+          </td>
+          <td>{{cartDetail.unitPrice}}</td>
+          <td>{{cartDetail.totalPrice}}</td>
+          <td><button class="btn btn-outline-dark btn-sm" (click)="deleteProductFromCart(cartDetail.cartDetailId)">Borrar</button></td>
+        </tr>
+        <tr>
+          <td><span>Total</span></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>{{totalAmount}}</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
   <div class="row container">
-    <button class="btn btn-outline-dark btn-sm" (click)="onNavToOrderDetails()" [disabled]="cartDetails==null">Comprar</button>
+    <button class="btn btn-outline-dark btn-sm mb-3" (click)="onNavToOrderDetails()"
+      [disabled]="cartDetails==null">Comprar</button>
   </div>
 </div>

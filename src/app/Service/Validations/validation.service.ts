@@ -13,7 +13,7 @@ export class ValidationService {
       min: 'El valor no puede ser negativo',
       max: `El valor no puede ser mayor que ${validatorValue.max}`,
       maxlength: `Largo maximo no puede ser mayor que ${validatorValue.requiredLength}`,
-      pattern: 'Pattern incorrect',
+      pattern: 'El formato del campo es incorrecto',
       invalidDecimalNumber: 'Invalid number format',
       invalidNoDecimalNumber: 'Invalid number format',
       validCreditCardNumber: 'Invalid credit card number'

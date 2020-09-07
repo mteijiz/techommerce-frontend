@@ -18,17 +18,17 @@ export class ProductListComponent implements OnInit {
   private productList: Product[];
   private cartDetail: CartDetails;
   private subscribe: any;
-  private categoryName : String = null;
-  private productListFiltered : Product[];
+  private categoryName: String = null;
+  private productListFiltered: Product[];
 
-  private cartForm : FormGroup;
+  private cartForm: FormGroup;
 
   constructor(
-    private productService: ProductService, 
-    private cartService : CartService,
-    private securityService:KeycloakSecurityService,
+    private productService: ProductService,
+    private cartService: CartService,
+    private securityService: KeycloakSecurityService,
     private activeRoute: ActivatedRoute,
-    private addCartFormBuilder : FormBuilder,
+    private addCartFormBuilder: FormBuilder,
     private router: Router
   ) { }
 
@@ -43,42 +43,38 @@ export class ProductListComponent implements OnInit {
     this.subscribe.unsubscribe();
   }
 
-  onClick(product){
+  onClick(product) {
     this.setCartForm(product);
-    if(this.cartForm.get('quantity').value <= product.productQuantity){
-      this.cartService.addToCartWithQuantity(this.cartForm.value).subscribe(
-        data => {
-        },
-        error => {
-        }
-      )
+    this.cartService.addToCartWithQuantity(this.cartForm.value).subscribe(
+      data => {
+        console.log("Success: ", data);
+      },
+      error => {
       }
-      else{
-        this.errorMessage = "No hay suficienta cantidad para el pedido";
-      }
+    )
   }
 
-  setCartForm(product){
+  setCartForm(product) {
     this.cartForm = this.addCartFormBuilder.group({
       product: [product, [Validators.required]],
       quantity: [1, [Validators.required, Validators.min(0)]]
     })
   }
 
-  goToProductDetails(product){
+  goToProductDetails(product) {
     this.router.navigateByUrl('/shop/product-details');
   }
 
-  loadProductWithCategory(){
+  loadProductWithCategory() {
     this.productService.getAllActiveProducts().subscribe(
       data => {
         this.productList = data;
         this.productListFiltered = this.productList;
         console.log("Prod: ", data);
-        if(this.categoryName != null){
+        if (this.categoryName != null) {
           this.productListFiltered = this.productList.filter((productList) => productList.productCategory.categoryName == this.categoryName)
         }
-        else{
+        else {
           this.productListFiltered = this.productList;
         }
         this.errorMessage = null;

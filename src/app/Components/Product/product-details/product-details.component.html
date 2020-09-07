@@ -4,21 +4,30 @@
     <app-product-carousel [product]="product"></app-product-carousel>
     <div class="mt-4 mb-4">
       <hr>
-      <h1 class="card-title text-center">{{product.productName}}</h1>
-      <hr>
-      <div class="row justify-content-around">
-        <h5>{{product.productBrand.brandName}}</h5>
-        <h5>{{product.productCategory.categoryName}}</h5>
-        <h5>{{product.productSubcategory.subcategoryName}}</h5>
-      </div>
+      <h1 class="card-title text-center">{{product.productName}}</h1>     
       <hr>
       <h4 class="card-text text-center">{{product.productDescription}}</h4>
+      <table class="table text-center">
+        <thead>
+          <tr>
+            <th><h5>Marca</h5></th>
+            <th><h5>Categoría</h5></th>
+            <th><h5>Subcategoría</h5></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th><h5>{{product.productBrand.brandName}}</h5></th>
+            <th><h5>{{product.productCategory.categoryName}}</h5></th>
+            <th><h5>{{product.productSubcategory.subcategoryName}}</h5></th>
+          </tr>
+        </tbody>
+      </table>
       <hr>
       <h5 class="card-text">Precio: $ {{product.productPrice}}</h5>
-      <h5 class="card-text">Valoración: {{product.productRate}}/10</h5>
-      <h5 class="card-text">Cantidad: {{product.productQuantity}}</h5>
+      <h5 class="card-text">Stock: {{product.productQuantity}}</h5>
       <hr>
-      <div class="container" *ngIf="securityService.keycloak.authenticated">
+      <div class="container-fluid" *ngIf="securityService.keycloak.authenticated">
         <form [formGroup]="cartForm" (ngSubmit)="onSubmit()">
           <div class="form-group row">
             <label for="inputPassword" class="col-sm-2 col-form-label">Cantidad</label>
@@ -41,7 +50,7 @@
       </div>
     </div>
     <!-- /.card -->
-    <button class="btn btn-outline-dark" type="button" (click)="goBack()">Atrás</button>
+    <button class="btn btn-outline-dark mb-4" type="button" (click)="goBack()">Atrás</button>
     <!-- /.card -->
 
   </div>

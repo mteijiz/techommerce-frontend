@@ -23,8 +23,8 @@ export class PurchaseService {
     private http: HttpClient
   ) { }
 
-  addPurchase(creditCardForm) : Observable<any>{
-    return this.http.post<any>(this.addPurchaseUrl, creditCardForm)
+  addPurchase() : Observable<any>{
+    return this.http.get<any>(this.addPurchaseUrl)
       .pipe(
         tap(() => {
           this.refreshCartValue.next();

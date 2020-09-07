@@ -40,7 +40,8 @@
       </div>
     </div>
     <div class="form-group"> 
-      <input value="Realizar pago" type="submit" class="btn btn-dark btn-lg form-control"  [disabled]="!creditCardForm.valid">
+      <button type="submit" class="btn btn-outline-dark mr-2"  [disabled]="!creditCardForm.valid">Realizar pago</button>
+      <button class="btn btn-outline-dark ml-2" type="button" (click)="goToCartTable()">Atrás</button>
     </div>
   </form>
 </div>

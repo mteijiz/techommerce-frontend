@@ -30,6 +30,7 @@ export class NavbarShopComponent implements OnInit {
 
   ngOnInit() {
     this.cartService.getRefreshCartValue.subscribe(() => {
+      console.log("Update navbar...");
       this.getQuantityOfProductInACart();
     })
     this.purchaseService.getRefreshCartValue.subscribe(() => {
@@ -60,8 +61,10 @@ export class NavbarShopComponent implements OnInit {
   getQuantityOfProductInACart(){
     this.cartService.getCart().subscribe(
       data => {
+        console.log("Data de cart: ", data);
         this.cart = data;
         this.quantityOfProductInCart = this.cart.quantityOfProduct;
+        this.errorMessage = null;
       },
       error =>{
         this.errorMessage = error.error.message;

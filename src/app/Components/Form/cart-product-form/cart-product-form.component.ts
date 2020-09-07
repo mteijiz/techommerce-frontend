@@ -29,11 +29,9 @@ export class CartProductFormComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log("Form: ", this.cartForm.value);
     this.cartService.updateQuantityOfAProductInACart(this.cartForm.value).subscribe(
       data => {
         console.log(data);
-        this.cartComponent.ngOnInit();
       },
       error => {
         console.log(error);
