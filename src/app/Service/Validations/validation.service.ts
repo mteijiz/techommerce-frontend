@@ -14,9 +14,12 @@ export class ValidationService {
       max: `El valor no puede ser mayor que ${validatorValue.max}`,
       maxlength: `Largo maximo no puede ser mayor que ${validatorValue.requiredLength}`,
       pattern: 'El formato del campo es incorrecto',
-      invalidDecimalNumber: 'Invalid number format',
-      invalidNoDecimalNumber: 'Invalid number format',
-      validCreditCardNumber: 'Invalid credit card number'
+      invalidDecimalNumber: 'El número puede tener hasta dos decimales',
+      invalidNoDecimalNumber: 'La cantidad tiene que ser un número entero',
+      invalidCreditCardNumber: 'Número de tarjeta invalida',
+      invalidMonthNumber: 'El número tiene que ser de dos digitos',
+      invalidYearNumber: 'El número tiene que ser de dos digitos',
+      invalidCVCNumber: 'El número tiene que ser de tres digitos'
     };
 
     return config[validatorName];
@@ -24,33 +27,56 @@ export class ValidationService {
 
   static decimalValidator(validation){
     
-    if(String(validation.value).match(
-      /[0-9]+([\.,][0-9][0-9])?/
-    )){
-      console.log("Dentro del if: ",validation.value);
+    if(String(validation.value).match(/^[0-9]+(.[0-9]{1,2})?$/g)){
       return null;
     }
     else{
-      console.log("Dentro del else: ",validation.value);
       return { invalidDecimalNumber : true }
     }
   }
 
   static noDecimalValidator(validation){
-    if(String(validation.value).match(
-      /[0-9]+/
-    )){
-      console.log("Dentro del if: ",validation.toString());
+    if(String(validation.value).match(/^[0-9]*$/g)){
       return null;
     }
     else{
-      console.log("Dentro del else: ",validation.value);
       return { invalidNoDecimalNumber : true }
     }
   }
 
-  static validCreditCardNumber(){
-    console.log("Enter credit card validator");
-    return null;
+  static creditCardNumberValidator(validation){
+    if(String(validation.value).match(/^4[0-9]{3}-?[0-9]{4}-?[0-9]{4}-?[0-9]{4}$/g)){
+      return null;
+    }
+    else{
+      return { invalidCreditCardNumber : true }
+    }
+  }
+
+  static monthTwoDigitsValidator(validation){
+    if(String(validation.value).match(/^[0-9][0-9]$/g)){
+      return null;
+    }
+    else{
+      return { invalidMonthNumber : true }
+    }
+  }
+
+  static yearTwoDigitsValidator(validation){
+    if(String(validation.value).match(/^[0-9][0-9]$/g)){
+      return null;
+    }
+    else{
+      return { invalidYearNumber : true }
+    }
+  }
+
+  static cvcThreeDigitsValidator(validation){
+    if(String(validation.value).match(/^[0-9][0-9][0-9]$/g)){
+      return null;
+    }
+    else{
+      return { invalidCVCNumber : true }
+    }
   }
 }

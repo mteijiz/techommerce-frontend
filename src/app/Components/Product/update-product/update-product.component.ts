@@ -10,6 +10,7 @@ import { Category } from 'src/app/Model/Category/category';
 import { Subcategory } from 'src/app/Model/Subcategory/subcategory';
 import { Product } from 'src/app/Model/Product/product';
 import { Router } from '@angular/router';
+import { ValidationService } from 'src/app/Service/Validations/validation.service';
 
 @Component({
   selector: 'app-update-product',
@@ -95,8 +96,8 @@ export class UpdateProductComponent implements OnInit {
       productCode: [this.product.productCode, [Validators.required, Validators.maxLength(10)]],
       productName: [this.product.productName, [Validators.required, Validators.maxLength(15)]],
       productDescription: [this.product.productDescription, [Validators.maxLength(1000)]],
-      productPrice: [this.product.productPrice, [Validators.required, Validators.min(0)]],
-      productQuantity: [this.product.productQuantity, [Validators.required]],
+      productPrice: [this.product.productPrice, [Validators.required, Validators.min(0), ValidationService.decimalValidator]],
+      productQuantity: [this.product.productQuantity, [Validators.required, Validators.min(0), ValidationService.noDecimalValidator]],
       productQuantityOfVotes: [this.product.productQuantityOfVotes, [Validators.required, Validators.min(0)]],
       productTotalPoints: [this.product.productTotalPoints, [Validators.required, Validators.min(0)]],
       productRate: [this.product.productRate, [Validators.required, Validators.min(0)]],

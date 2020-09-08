@@ -29,14 +29,15 @@
     <div class="form-group row">
       <label for="cc-number" class="col-sm-2 col-form-label">CVC de tarjeta</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" formControlName="ccCvc">
+        <input type="password" class="form-control" formControlName="ccCvc">
         <app-validation-messages [validation]="creditCardForm.get('ccCvc')"></app-validation-messages>
       </div>
     </div>
     <div class="form-group row">
-      <label for="cc-number" class="col-sm-2 col-form-label">Nombre del dueño de la tarjeta</label>
+      <label for="cc-number" class="col-sm-2 col-form-label">Nombre del dueño</label>
       <div class="col-sm-10">
         <input type="text" class="form-control" formControlName="ccHolderName">
+        <app-validation-messages [validation]="creditCardForm.get('ccHolderName')"></app-validation-messages>
       </div>
     </div>
     <div class="form-group"> 

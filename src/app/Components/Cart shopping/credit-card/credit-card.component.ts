@@ -4,6 +4,7 @@ import { CartDetails } from 'src/app/Model/CartDetails/cart-details';
 import { PurchaseService } from 'src/app/Service/Purchase/purchase.service';
 import { error } from 'protractor';
 import { Router } from '@angular/router';
+import { ValidationService } from 'src/app/Service/Validations/validation.service';
 
 @Component({
   selector: 'app-credit-card',
@@ -24,10 +25,10 @@ export class CreditCardComponent implements OnInit {
   private productsPurchased : CartDetails [];
 
   private creditCardForm = this.creditCardFormBuilder.group({
-    ccNumber: ['', [Validators.required, Validators.pattern('^4[0-9]{3}-?[0-9]{4}-?[0-9]{4}-?[0-9]{4}$')]],
-    ccExpMonth: ['', [Validators.required, Validators.pattern('[0-1][0-9]')]],
-    ccExpYear: ['', [Validators.required, Validators.pattern('[0-9]{2}')]],
-    ccCvc: ['', [Validators.required, Validators.pattern('[0-9]{3}')]],
+    ccNumber: ['', [Validators.required, ValidationService.creditCardNumberValidator]],
+    ccExpMonth: ['', [Validators.required, ValidationService.monthTwoDigitsValidator, Validators.min(0), Validators.max(12)]],
+    ccExpYear: ['', [Validators.required, ValidationService.yearTwoDigitsValidator]],
+    ccCvc: ['', [Validators.required, ValidationService.cvcThreeDigitsValidator]],
     ccHolderName: ['', [Validators.required]]
   });
 

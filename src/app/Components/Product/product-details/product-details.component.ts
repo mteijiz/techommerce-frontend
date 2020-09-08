@@ -5,6 +5,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CartService } from 'src/app/Service/Cart/cart.service';
 import { error } from 'protractor';
 import { Location } from '@angular/common';
+import { ValidationService } from 'src/app/Service/Validations/validation.service';
 
 @Component({
   selector: 'app-product-details',
@@ -44,7 +45,7 @@ export class ProductDetailsComponent implements OnInit {
   setCartForm(){
     this.cartForm = this.addCartFormBuilder.group({
       product: [this.product, [Validators.required]],
-      quantity: ['', [Validators.required, Validators.min(0)]]
+      quantity: ['', [Validators.required, Validators.min(0), ValidationService.noDecimalValidator]]
     })
   }
 

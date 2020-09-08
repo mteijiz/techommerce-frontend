@@ -13,5 +13,6 @@
         aria-hidden="true"></i></button>
     </div>
     <input type="number" value="{{cartDetail.quantity}}" class="form-control" formControlName="newQuantity">
+    <app-validation-messages [validation]="cartForm.get('newQuantity')"></app-validation-messages>
   </div>
 </form>

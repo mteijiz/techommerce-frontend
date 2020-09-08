@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CartService } from 'src/app/Service/Cart/cart.service';
 import { CartComponent } from '../../Cart shopping/cart/cart.component';
+import { ValidationService } from 'src/app/Service/Validations/validation.service';
 
 @Component({
   selector: 'app-cart-product-form',
@@ -15,8 +16,7 @@ export class CartProductFormComponent implements OnInit {
 
   constructor(
     private addCartFormBuilder : FormBuilder,
-    private cartService : CartService,
-    private cartComponent : CartComponent
+    private cartService : CartService
   ) { }
 
   private cartForm : FormGroup;
@@ -24,8 +24,12 @@ export class CartProductFormComponent implements OnInit {
   ngOnInit() {
     this.cartForm = this.addCartFormBuilder.group({
       cartDetail: [this.cartDetail, [Validators.required]],
-      newQuantity: [this.cartDetail.quantity, [Validators.required, Validators.min(0)]]
+      newQuantity: [this.cartDetail.quantity, [Validators.required, Validators.min(0), ValidationService.noDecimalValidator]]
     })
+  }
+
+  get newQuantity(){
+    return this.cartForm.get('newQuantity')
   }
 
   onSubmit(){
