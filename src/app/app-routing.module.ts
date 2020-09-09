@@ -22,6 +22,7 @@ import { ShoppingHistoryComponent } from './Components/Cart shopping/shopping-hi
 import { CreditCardComponent } from './Components/Cart shopping/credit-card/credit-card.component';
 import { ShoppingHistoryDetailsComponent } from './Components/Cart shopping/shopping-history-details/shopping-history-details.component';
 import { ImageCardListComponent } from './Components/Product/image-card-list/image-card-list.component';
+import { PageNotFoundComponent } from './Components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
     {
@@ -129,6 +130,10 @@ const routes: Routes = [
         path: 'shopping-history/order-details',
         component: ShoppingHistoryDetailsComponent,
         canActivate: [UserAuthGuardService || AdminAuthGuardService]
+    },
+    {
+        path: '**',
+        component: PageNotFoundComponent
     }
 ]
 

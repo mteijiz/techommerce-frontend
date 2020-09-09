@@ -43,24 +43,6 @@ export class ProductListComponent implements OnInit {
     this.subscribe.unsubscribe();
   }
 
-  onClick(product) {
-    this.setCartForm(product);
-    this.cartService.addToCartWithQuantity(this.cartForm.value).subscribe(
-      data => {
-        console.log("Success: ", data);
-      },
-      error => {
-      }
-    )
-  }
-
-  setCartForm(product) {
-    this.cartForm = this.addCartFormBuilder.group({
-      product: [product, [Validators.required]],
-      quantity: [1, [Validators.required, Validators.min(0)]]
-    })
-  }
-
   goToProductDetails(product) {
     this.router.navigateByUrl('/shop/product-details');
   }

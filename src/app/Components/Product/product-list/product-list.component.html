@@ -23,9 +23,7 @@
               </div>
               <a routerLink="product-details" routerLinkActive="active" [state]="product"
                 class="btn btn-outline-dark mr-1 btn-sm mr-2">Detalles</a>
-              <button (click)="onClick(product)" class="btn btn-outline-dark ml-2 btn-sm"
-                *ngIf="securityService.keycloak.authenticated"><i class="fa fa-cart-plus"
-                  aria-hidden="true"></i></button>
+              <app-add-product-to-cart-form [productToAdd]="product"></app-add-product-to-cart-form>
             </div>
               <img
                 src="{{'data:' + product.productImage[0].imageType + ';base64,' + product.productImage[0].imageBytes}}"

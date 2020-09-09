@@ -16,6 +16,8 @@ export class ProductDetailsComponent implements OnInit {
 
   private product : Product;
   private errorMessage : String;
+  private successfullMessage : String;
+  private count = 0;
 
   constructor(
     private securityService : KeycloakSecurityService,
@@ -61,13 +63,15 @@ export class ProductDetailsComponent implements OnInit {
     if(this.cartForm.get('quantity').value <= this.product.productQuantity){
     this.cartService.addToCartWithQuantity(this.cartForm.value).subscribe(
       data => {
+        this.count = this.count + this.cartForm.value.quantity;
+        this.errorMessage = null;
+        this.successfullMessage = "Se agrego " + this.count + " unidad/es al carrito";
       },
       error => {
+        this.successfullMessage = null;
+        this.errorMessage = error;
       }
     )
-    }
-    else{
-      this.errorMessage = "No hay suficienta cantidad para el pedido";
     }
   }
 

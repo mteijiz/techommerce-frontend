@@ -38,7 +38,9 @@ import { ProductVoteComponent } from './Components/Product/product-vote/product-
 import { ShoppingHistoryComponent } from './Components/Cart shopping/shopping-history/shopping-history.component';
 import { CreditCardComponent } from './Components/Cart shopping/credit-card/credit-card.component';
 import { ShoppingHistoryDetailsComponent } from './Components/Cart shopping/shopping-history-details/shopping-history-details.component';
-import { CartProductFormComponent } from './Components/Form/cart-product-form/cart-product-form.component'; 
+import { CartProductFormComponent } from './Components/Form/cart-product-form/cart-product-form.component';
+import { AddProductToCartFormComponent } from './Components/Form/add-product-to-cart-form/add-product-to-cart-form.component';
+import { PageNotFoundComponent } from './Components/page-not-found/page-not-found.component'; 
 
 export function kcFactory(kcSecurity:KeycloakSecurityService){
   return () => kcSecurity.init(); 
@@ -75,7 +77,9 @@ export function kcFactory(kcSecurity:KeycloakSecurityService){
     ShoppingHistoryComponent,
     CreditCardComponent,
     ShoppingHistoryDetailsComponent,
-    CartProductFormComponent
+    CartProductFormComponent,
+    AddProductToCartFormComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

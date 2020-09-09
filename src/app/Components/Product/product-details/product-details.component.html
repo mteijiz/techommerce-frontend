@@ -6,7 +6,7 @@
       <hr>
       <h1 class="card-title text-center">{{product.productName}}</h1>     
       <hr>
-      <h4 class="card-text text-center">{{product.productDescription}}</h4>
+      <h4 class="text-center">{{product.productDescription}}</h4>
       <table class="table text-center">
         <thead>
           <tr>
@@ -46,6 +46,10 @@
       </div>-->
       <div *ngIf="errorMessage" class="text-center">
         <label class="text-danger">{{errorMessage}}</label>
+        <hr>
+      </div>
+      <div *ngIf="successfullMessage" class="text-center">
+        <label class="text-success">{{successfullMessage}}</label>
         <hr>
       </div>
     </div>
