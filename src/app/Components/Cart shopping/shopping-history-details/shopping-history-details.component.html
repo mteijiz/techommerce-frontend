@@ -26,8 +26,8 @@
           <td>{{details.product.productName}}</td>
           <td>{{details.quantity}}</td>
           <!--<td><input type="number" placeholder="New quantity" value="cartDetail.quantity"></td>-->
-          <td>{{details.unitPrice}}</td>
-          <td>{{details.totalPrice}}</td>
+          <td>{{details.unitPrice | number:'1.2-2'}}</td>
+          <td>{{details.totalPrice | number:'1.2-2'}}</td>
         </tr>
       </tbody>
     </table>

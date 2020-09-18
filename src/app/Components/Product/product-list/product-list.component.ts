@@ -6,6 +6,8 @@ import { CartDetails } from 'src/app/Model/CartDetails/cart-details';
 import { KeycloakSecurityService } from 'src/app/Service/Keycloak/keycloak-security.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ModalProductFilterComponent } from '../../Modal/modal-product-filter/modal-product-filter.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-product-list',
@@ -29,7 +31,8 @@ export class ProductListComponent implements OnInit {
     private securityService: KeycloakSecurityService,
     private activeRoute: ActivatedRoute,
     private addCartFormBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit() {
@@ -67,4 +70,13 @@ export class ProductListComponent implements OnInit {
     )
   }
 
+  openFilterFormModal() {
+    const modalRef = this.modalService.open(ModalProductFilterComponent);
+    //modalRef.componentInstance.image = image;
+    modalRef.result.then((result) => {
+    }).catch((error) => {
+      this.productListFiltered = [this.productList[0]];
+      console.log(this.productList);
+    });
+  }
 }

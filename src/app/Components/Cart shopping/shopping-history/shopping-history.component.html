@@ -11,7 +11,6 @@
       <thead class="thead-dark">
         <tr>
           <th scope="col">Fecha</th>
-          <th scope="col">Pago</th>
           <th scope="col">Cantidad</th>
           <th scope="col">Total</th>
           <th scope="col">Visualizar</th>
@@ -20,9 +19,8 @@
       <tbody>
         <tr *ngFor="let purchaseOrder of purchaseOrders">
           <td>{{purchaseOrder.purchaseDate}}</td>
-          <td>{{purchaseOrder.ccNumberFourLastDigits}}</td>
           <td>{{purchaseOrder.quantity}}</td>
-          <td>{{purchaseOrder.total}}</td>
+          <td>{{purchaseOrder.total | number:'1.2-2'}}</td>
           <td>
             <a routerLink="order-details" routerLinkActive="active" [state]="purchaseOrder"
               class="btn btn-outline-dark mr-1 btn-sm">

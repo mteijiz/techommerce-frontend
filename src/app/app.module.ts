@@ -40,7 +40,9 @@ import { CreditCardComponent } from './Components/Cart shopping/credit-card/cred
 import { ShoppingHistoryDetailsComponent } from './Components/Cart shopping/shopping-history-details/shopping-history-details.component';
 import { CartProductFormComponent } from './Components/Form/cart-product-form/cart-product-form.component';
 import { AddProductToCartFormComponent } from './Components/Form/add-product-to-cart-form/add-product-to-cart-form.component';
-import { PageNotFoundComponent } from './Components/page-not-found/page-not-found.component'; 
+import { PageNotFoundComponent } from './Components/page-not-found/page-not-found.component';
+import { ModalProductFilterComponent } from './Components/Modal/modal-product-filter/modal-product-filter.component';
+import { ModalWarningPriceComponent } from './Components/Modal/modal-warning-price/modal-warning-price.component'; 
 
 export function kcFactory(kcSecurity:KeycloakSecurityService){
   return () => kcSecurity.init(); 
@@ -79,7 +81,9 @@ export function kcFactory(kcSecurity:KeycloakSecurityService){
     ShoppingHistoryDetailsComponent,
     CartProductFormComponent,
     AddProductToCartFormComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ModalProductFilterComponent,
+    ModalWarningPriceComponent
   ],
   imports: [
     BrowserModule,
@@ -96,7 +100,9 @@ export function kcFactory(kcSecurity:KeycloakSecurityService){
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    ModalDeleteImageComponent
+    ModalDeleteImageComponent,
+    ModalProductFilterComponent,
+    ModalWarningPriceComponent
   ]
 })
 export class AppModule { }

@@ -24,7 +24,7 @@
         </tbody>
       </table>
       <hr>
-      <h5 class="card-text">Precio: $ {{product.productPrice}}</h5>
+      <h5 class="card-text">Precio: $ {{product.productPrice | number:'1.2-2'}}</h5>
       <h5 class="card-text">Stock: {{product.productQuantity}}</h5>
       <hr>
       <div class="container-fluid" *ngIf="securityService.keycloak.authenticated">

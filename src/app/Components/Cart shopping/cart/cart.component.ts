@@ -4,6 +4,8 @@ import { CartDetails } from 'src/app/Model/CartDetails/cart-details';
 import { KeycloakSecurityService } from 'src/app/Service/Keycloak/keycloak-security.service';
 import { Router } from '@angular/router';
 import { Cart } from 'src/app/Model/Cart/cart';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalWarningPriceComponent } from '../../Modal/modal-warning-price/modal-warning-price.component';
 
 @Component({
   selector: 'app-cart',
@@ -16,11 +18,13 @@ export class CartComponent implements OnInit {
   private cartDetails : CartDetails[];
   private errorMessage : String;
   private totalAmount : number;
+  private isDisable = false;
 
   constructor(
     private cartService : CartService,
     private securityService:KeycloakSecurityService,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit() {
@@ -64,5 +68,12 @@ export class CartComponent implements OnInit {
       this.cartDetails = null;
     }
   )
+ }
+
+ openWarningPriceModal(cartDetail){
+  const modalRef = this.modalService.open(ModalWarningPriceComponent);
+  modalRef.result.then((result) => {
+  }).catch((error) => {
+  });
  }
 }
