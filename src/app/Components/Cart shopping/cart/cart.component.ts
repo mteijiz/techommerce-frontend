@@ -18,7 +18,6 @@ export class CartComponent implements OnInit {
   private cartDetails : CartDetails[];
   private errorMessage : String;
   private totalAmount : number;
-  private isDisable = false;
 
   constructor(
     private cartService : CartService,
