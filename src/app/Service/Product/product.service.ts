@@ -16,7 +16,8 @@ export class ProductService {
   updateProductStateUrl = this.baseUrl + 'updateState';
   updateProductUrl = this.baseUrl + 'update'; 
   addVoteToProductUrl = this.baseUrl + 'addVote';
-  getProductByIdUrl = this.baseUrl + 'getById/'
+  getProductByIdUrl = this.baseUrl + 'getById/';
+  getProductsByFilterUrl = this.baseUrl + 'filter';
 
   constructor(
     private http: HttpClient
@@ -50,4 +51,8 @@ export class ProductService {
     return this.http.get<any>(`${this.getProductByIdUrl}${productId}`);
   }
 
+  getProductsByFilter(filter){
+    console.log(filter);
+    return this.http.post<any>(this.getProductsByFilterUrl, filter);
+  }
 }

@@ -7,6 +7,7 @@ import { BrandService } from 'src/app/Service/Brand/brand.service';
 import { CategoryService } from 'src/app/Service/Category/category.service';
 import { SubcategoryService } from 'src/app/Service/Subcategory/subcategory.service';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { ProductService } from 'src/app/Service/Product/product.service';
 
 @Component({
   selector: 'app-modal-product-filter',
@@ -25,24 +26,27 @@ export class ModalProductFilterComponent implements OnInit {
     private crudBrand: BrandService,
     private crudSubcategory : SubcategoryService,
     private crudCategory : CategoryService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private productService : ProductService
   ) { }
 
   filterForm: FormGroup = this.fb.group({
     brands: this.fb.array([]),
     categories: this.fb.array([]),
-    subcategories: this.fb.array([])
+    subcategories: this.fb.array([]),
+    minPrice: ['', [Validators.min(0)]],
+    maxPrice: ['', [Validators.min(0)]]
   });
 
-  onCheckboxChangeBrand(e) {
+  onCheckboxChangeBrand(e, brand) {
     const checkArray: FormArray = this.filterForm.get('brands') as FormArray;
   
     if (e.target.checked) {
-      checkArray.push(new FormControl(e.target.value));
+      checkArray.push(new FormControl(brand));
     } else {
       let i: number = 0;
       checkArray.controls.forEach((item: FormControl) => {
-        if (item.value == e.target.value) {
+        if (item.value == brand) {
           checkArray.removeAt(i);
           return;
         }
@@ -52,15 +56,15 @@ export class ModalProductFilterComponent implements OnInit {
     console.log(this.filterForm.value)
   }
 
-  onCheckboxChangeCategory(e) {
+  onCheckboxChangeCategory(e, category) {
     const checkArray: FormArray = this.filterForm.get('categories') as FormArray;
   
     if (e.target.checked) {
-      checkArray.push(new FormControl(e.target.value));
+      checkArray.push(new FormControl(category));
     } else {
       let i: number = 0;
       checkArray.controls.forEach((item: FormControl) => {
-        if (item.value == e.target.value) {
+        if (item.value == category) {
           checkArray.removeAt(i);
           return;
         }
@@ -70,22 +74,22 @@ export class ModalProductFilterComponent implements OnInit {
     console.log(this.filterForm.value)
   }
 
-  onCheckboxChangeSubcategory(e) {
+  onCheckboxChangeSubcategory(e, subcategory) {
     const checkArray: FormArray = this.filterForm.get('subcategories') as FormArray;
   
     if (e.target.checked) {
-      checkArray.push(new FormControl(e.target.value));
+      checkArray.push(new FormControl(subcategory));
     } else {
       let i: number = 0;
       checkArray.controls.forEach((item: FormControl) => {
-        if (item.value == e.target.value) {
+        if (item.value == subcategory) {
           checkArray.removeAt(i);
           return;
         }
         i++;
       });
     }
-    
+    console.log(this.filterForm.value)
   }
 
   ngOnInit() {
@@ -126,6 +130,14 @@ export class ModalProductFilterComponent implements OnInit {
 
   onSubmit() {
     console.log(this.filterForm.value);
+    this.productService.getProductsByFilter(this.filterForm.value).subscribe(
+      data => {
+        console.log('Success ', data);
+      },
+      error => {
+        console.log('Fail', error);
+      }
+    )
   }
 
   closeModal() {

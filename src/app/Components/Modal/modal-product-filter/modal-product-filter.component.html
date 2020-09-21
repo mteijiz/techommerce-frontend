@@ -5,48 +5,48 @@
   <div class="container">
     <form [formGroup]="filterForm" (ngSubmit)="onSubmit()" novalidate>
       <div class="row">
-        <div class="col-4">
+        <div class="col-3">
           <a class="btn btn-outline-dark btn-sm" data-toggle="collapse" data-target="#collapseExample"
             aria-expanded="false" aria-controls="collapseExample">
             Marca
           </a>
           <div class="collapse" id="collapseExample">
-            <div class="form-group form-check m-1" *ngFor="let brand of brandList">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1" (change)="onCheckboxChangeBrand($event)" [value]="brand | json">
+            <div class="form-group form-check m-1" *ngFor="let brand of brandList; index as i">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" (change)="onCheckboxChangeBrand($event, brand)" [value]="brand">
               <small class="form-check-label" for="exampleCheck1">{{brand.brandName}}</small>
             </div>
           </div>
         </div>
-        <div class="col-4">
+        <div class="col-3">
           <a class="btn btn-outline-dark btn-sm" data-toggle="collapse" data-target="#collapseExampleThree"
             aria-expanded="false" aria-controls="collapseExampleThree">
             Categoría
           </a>
           <div class="collapse" id="collapseExampleThree">
             <div class="form-group form-check m-1" *ngFor="let category of categoryList">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1" (change)="onCheckboxChangeCategory($event)" [value]="category | json">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" (change)="onCheckboxChangeCategory($event, category)" [value]="category">
               <small class="form-check-label" for="exampleCheck1">{{category.categoryName}}</small>
             </div>
           </div>
         </div>
-        <div class="col-4">
+        <div class="col-3">
           <a class="btn btn-outline-dark btn-sm" data-toggle="collapse" data-target="#collapseExampleTwo"
             aria-expanded="false" aria-controls="collapseExampleTwo">
             Subcategoría
           </a>
           <div class="collapse" id="collapseExampleTwo">
             <div class="form-group form-check m-1" *ngFor="let subcategory of subcategoryList">
-              <input type="checkbox" class="form-check-input" id="exampleCheck2" (change)="onCheckboxChangeSubcategory($event)" [value]="subcategory | json">
+              <input type="checkbox" class="form-check-input" id="exampleCheck2" (change)="onCheckboxChangeSubcategory($event, subcategory)" [value]="subcategory">
               <small class="form-check-label" for="exampleCheck2">{{subcategory.subcategoryName}}</small>
             </div>
           </div>
         </div>
-        <div class="col-4">
+        <div class="col-3">
           <div class="row">
             <div class="form-group">
               <label for="exampleInputEmail1">Precio</label>
-              <input type="number" class="form-control mb-2" aria-describedby="emailHelp" placeholder="Min">
-              <input type="number" class="form-control mt-2" aria-describedby="emailHelp" placeholder="Max">
+              <input type="number" class="form-control mb-2" aria-describedby="emailHelp" placeholder="Min" formControlName="minPrice">
+              <input type="number" class="form-control mt-2" aria-describedby="emailHelp" placeholder="Max" formControlName="maxPrice">
             </div>
           </div>
         </div>
