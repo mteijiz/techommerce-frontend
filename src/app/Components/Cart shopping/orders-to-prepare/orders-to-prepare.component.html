@@ -13,6 +13,7 @@
           <th scope="col">Fecha</th>
           <th scope="col">Cantidad</th>
           <th scope="col">Total</th>
+          <th scope="col">Estado</th>
           <th scope="col">Visualizar</th>
         </tr>
       </thead>
@@ -21,6 +22,14 @@
           <td>{{purchaseOrder.purchaseDate}}</td>
           <td>{{purchaseOrder.quantity}}</td>
           <td>{{purchaseOrder.total | number:'1.2-2'}}</td>
+          <td>
+            <div *ngIf="purchaseOrder.status; else notPrepared" >
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+            <ng-template #notPrepared>
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </ng-template>
+          </td>
           <td>
             <a routerLink="order-details" routerLinkActive="active" [state]="purchaseOrder"
               class="btn btn-outline-dark mr-1 btn-sm">

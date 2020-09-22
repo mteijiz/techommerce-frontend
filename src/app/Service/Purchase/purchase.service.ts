@@ -13,7 +13,8 @@ export class PurchaseService {
   private addPurchaseUrl = this.baseUrl + 'add';
   private getOrdersUrl = this.baseUrl + 'getOrders';
   private getAllOrderUrl = this.baseUrl + 'getAllOrders';
-  private changeStatusUrl = this.baseUrl + 'changeStatus/'
+  private changeStatusUrl = this.baseUrl + 'changeStatus/';
+  private changeDetailStatusUrl = this.baseUrl + 'changeStatus/';
 
   private refreshCartValue = new Subject<void>();
 
@@ -44,6 +45,10 @@ export class PurchaseService {
 
   changeStatus(purchaseOrderId: any) {
     return this.http.get<any>(`${this.changeStatusUrl}${purchaseOrderId}`);
+  }
+
+  changeStatusOfDetail(purchaseOrderId: any, purchaseOrderDetailsId: any) {
+    return this.http.get<any>(`${this.changeStatusUrl}${purchaseOrderId}/${purchaseOrderDetailsId}`);
   }
 
 }

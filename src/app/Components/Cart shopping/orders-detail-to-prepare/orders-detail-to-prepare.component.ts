@@ -36,4 +36,16 @@ export class OrdersDetailToPrepareComponent implements OnInit {
       }
     );
   }
+
+  changeDetailStatus(details){
+    this.purchaseOrderService.changeStatusOfDetail(this.purchaseOrder.purchaseOrderId, details.purchaseOrderDetailsId).subscribe(
+      data => {
+        console.log(data);
+        this.purchaseOrder = data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
 }

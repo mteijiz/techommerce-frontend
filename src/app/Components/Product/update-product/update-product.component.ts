@@ -78,6 +78,10 @@ export class UpdateProductComponent implements OnInit {
     return this.productUpdateForm.get('productState');
   }
 
+  get productQuantityToAddOrSubstract(){
+    return this.productUpdateForm.get('productQuantityToAddOrSubstract');
+  }
+
   ngOnInit() {
     if (localStorage.getItem("product") != null)
       this.getLocalStorage();
@@ -100,6 +104,7 @@ export class UpdateProductComponent implements OnInit {
       productDescription: [this.product.productDescription, [Validators.maxLength(1000)]],
       productPrice: [this.product.productPrice, [Validators.required, Validators.min(0), ValidationService.decimalValidator]],
       productQuantity: [this.product.productQuantity, [Validators.required, Validators.min(0), ValidationService.noDecimalValidator]],
+      productQuantityToAddOrSubstract: ['', [Validators.required, ValidationService.noDecimalValidatorAndNegative]],
       productQuantityOfVotes: [this.product.productQuantityOfVotes, [Validators.required, Validators.min(0)]],
       productTotalPoints: [this.product.productTotalPoints, [Validators.required, Validators.min(0)]],
       productRate: [this.product.productRate, [Validators.required, Validators.min(0)]],

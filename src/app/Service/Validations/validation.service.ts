@@ -16,6 +16,7 @@ export class ValidationService {
       pattern: 'El formato del campo es incorrecto',
       invalidDecimalNumber: 'El número puede tener hasta dos decimales',
       invalidNoDecimalNumber: 'La cantidad tiene que ser un número entero',
+      invalidNoDecimalNumberAndNegative: 'La cantidad tiene que ser un entero',
       invalidCreditCardNumber: 'Número de tarjeta invalida',
       invalidMonthNumber: 'El número tiene que ser de dos digitos',
       invalidYearNumber: 'El número tiene que ser de dos digitos',
@@ -41,6 +42,15 @@ export class ValidationService {
     }
     else{
       return { invalidNoDecimalNumber : true }
+    }
+  }
+
+  static noDecimalValidatorAndNegative(validation){
+    if(String(validation.value).match(/^(-)?[0-9]*$/g)){
+      return null;
+    }
+    else{
+      return { invalidNoDecimalNumberAndNegative : true }
     }
   }
 

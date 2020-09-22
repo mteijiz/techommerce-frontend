@@ -39,10 +39,12 @@
       </div>
     </div>
     <div class="form-group row">
-      <label for="productDescription" class="col-sm-2 col-form-label">Actualizar stock</label>
+      <label for="productDescription" class="col-sm-2 col-form-label">Cambiar stock</label>
       <div class="col-sm-10">
-        <input type=" number" class="form-control" formControlName="productQuantity" id="productQuantity">
-        <app-validation-messages [validation]="productUpdateForm.get('productQuantity')"></app-validation-messages>
+        <input type=" number" class="form-control" [value]="product.productQuantity" id="productQuantity">
+        +
+        <input type=" number" class="form-control" formControlName="productQuantityToAddOrSubstract" id="productQuantity">
+        <app-validation-messages [validation]="productUpdateForm.get('productQuantityToAddOrSubstract')"></app-validation-messages>
       </div>
     </div>
     <div class="form-group row">

@@ -17,6 +17,7 @@
           <th scope="col">Precio ($)</th>
           <th scope="col">Total</th>
           <th scope="col">Estado</th>
+          <th scope="col">Modifcar estado</th>
         </tr>
       </thead>
       <tbody>
@@ -36,6 +37,9 @@
               <ng-template #notPrepared>
                 <i class="fa fa-times" aria-hidden="true"></i>
               </ng-template>
+            </td>
+            <td>
+                <button class="btn btn-outline-dark mb-4" type="button" (click)="changeDetailStatus(details)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
             </td>
         </tr>
       </tbody>
