@@ -26,13 +26,11 @@ export class CreditCardComponent implements OnInit {
 
   private creditCardForm = this.creditCardFormBuilder.group({
     ccNumber: ['', [Validators.required, ValidationService.creditCardNumberValidator]],
-    ccExpMonth: ['', [Validators.required, ValidationService.monthTwoDigitsValidator, Validators.min(0), Validators.max(12)]],
+    ccExpMonth: ['', [Validators.required, ValidationService.monthTwoDigitsValidator, Validators.min(0), Validators.max(12), Validators.min(1)]],
     ccExpYear: ['', [Validators.required, ValidationService.yearTwoDigitsValidator]],
     ccCvc: ['', [Validators.required, ValidationService.cvcThreeDigitsValidator]],
     ccHolderName: ['', [Validators.required]]
   });
-
-  private cartDetailsForm : FormGroup;
 
   get ccNumber(){
     return this.creditCardForm.get('ccNumber');
@@ -57,6 +55,7 @@ export class CreditCardComponent implements OnInit {
     this.purchaseService.addPurchase().subscribe(
       data => {
         console.log(data);
+        this.gotToShoppingHistory();
       },
       error => {
         console.log(error);
@@ -66,6 +65,10 @@ export class CreditCardComponent implements OnInit {
 
   goToCartTable(){
     this.router.navigateByUrl('/cart');
+  }
+
+  gotToShoppingHistory(){
+    this.router.navigateByUrl('/shopping-history');
   }
 
 }

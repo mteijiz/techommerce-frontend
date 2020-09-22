@@ -10,7 +10,7 @@ export class ValidationService {
   static getValidatorErrorMessage(validatorName: string, validatorValue?: any) {
     let config = {
       required: 'El campo es requerido',
-      min: 'El valor no puede ser negativo',
+      min: `El valor tiene que ser mayor que ${validatorValue.min}`,
       max: `El valor no puede ser mayor que ${validatorValue.max}`,
       maxlength: `Largo maximo no puede ser mayor que ${validatorValue.requiredLength}`,
       pattern: 'El formato del campo es incorrecto',

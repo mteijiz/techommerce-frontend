@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Cart } from 'src/app/Model/Cart/cart';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalWarningPriceComponent } from '../../Modal/modal-warning-price/modal-warning-price.component';
+import { ModalWarningProductComponent } from '../../Modal/modal-warning-product/modal-warning-product.component';
 
 @Component({
   selector: 'app-cart',
@@ -69,8 +70,24 @@ export class CartComponent implements OnInit {
   )
  }
 
+ checkStatusCartDetails(){
+   for(let detail of this.cartDetails){
+    if(!detail.state){
+      return true;
+    } 
+   }
+   return false;
+ }
+
  openWarningPriceModal(cartDetail){
   const modalRef = this.modalService.open(ModalWarningPriceComponent);
+  modalRef.result.then((result) => {
+  }).catch((error) => {
+  });
+ }
+
+ openWarningProductModal(cartDetail){
+  const modalRef = this.modalService.open(ModalWarningProductComponent);
   modalRef.result.then((result) => {
   }).catch((error) => {
   });

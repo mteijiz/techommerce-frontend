@@ -42,7 +42,10 @@ import { CartProductFormComponent } from './Components/Form/cart-product-form/ca
 import { AddProductToCartFormComponent } from './Components/Form/add-product-to-cart-form/add-product-to-cart-form.component';
 import { PageNotFoundComponent } from './Components/page-not-found/page-not-found.component';
 import { ModalProductFilterComponent } from './Components/Modal/modal-product-filter/modal-product-filter.component';
-import { ModalWarningPriceComponent } from './Components/Modal/modal-warning-price/modal-warning-price.component'; 
+import { ModalWarningPriceComponent } from './Components/Modal/modal-warning-price/modal-warning-price.component';
+import { ModalWarningProductComponent } from './Components/Modal/modal-warning-product/modal-warning-product.component';
+import { OrdersToPrepareComponent } from './Components/Cart shopping/orders-to-prepare/orders-to-prepare.component';
+import { OrdersDetailToPrepareComponent } from './Components/Cart shopping/orders-detail-to-prepare/orders-detail-to-prepare.component'; 
 
 export function kcFactory(kcSecurity:KeycloakSecurityService){
   return () => kcSecurity.init(); 
@@ -83,7 +86,10 @@ export function kcFactory(kcSecurity:KeycloakSecurityService){
     AddProductToCartFormComponent,
     PageNotFoundComponent,
     ModalProductFilterComponent,
-    ModalWarningPriceComponent
+    ModalWarningPriceComponent,
+    ModalWarningProductComponent,
+    OrdersToPrepareComponent,
+    OrdersDetailToPrepareComponent
   ],
   imports: [
     BrowserModule,
@@ -102,7 +108,8 @@ export function kcFactory(kcSecurity:KeycloakSecurityService){
   entryComponents: [
     ModalDeleteImageComponent,
     ModalProductFilterComponent,
-    ModalWarningPriceComponent
+    ModalWarningPriceComponent,
+    ModalWarningProductComponent
   ]
 })
 export class AppModule { }

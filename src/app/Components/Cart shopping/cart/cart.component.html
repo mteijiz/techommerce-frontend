@@ -10,7 +10,7 @@
       <thead class="thead-dark">
         <tr>
           <th scope="col">No disponible</th>
-          <th scope="col">Alerta</th>
+          <th scope="col">Precio actualizado</th>
           <th scope="col">Imagen</th>
           <th scope="col">Nombre</th>
           <th scope="col">Cantidad</th>
@@ -21,8 +21,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let cartDetail of cartDetails">
-          <td><button *ngIf="!cartDetail.state" class="btn btn-outline-danger ml-2 btn-sm"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button></td>
-          <td><button *ngIf="cartDetail.unitPrice != cartDetail.product.productPrice" class="btn btn-outline-danger ml-2 btn-sm" (click)="openWarningPriceModal(cartDetail)"  [disabled]="isDisable"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button></td>
+          <td><button *ngIf="!cartDetail.state" class="btn btn-outline-danger ml-2 btn-sm" (click)="openWarningProductModal(cartDetail)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button></td>
+          <td><button *ngIf="cartDetail.unitPrice != cartDetail.product.productPrice" class="btn btn-outline-danger ml-2 btn-sm" (click)="openWarningPriceModal(cartDetail)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button></td>
           <td><img
               src="{{'data:' + cartDetail.product.productImage[0].imageType + ';base64,' + cartDetail.product.productImage[0].imageBytes}}"
               width="75" height="75" class="ml-lg-5 order-1 order-lg-2"></td>
@@ -48,6 +48,6 @@
     </table>
   <div class="row container">
     <button class="btn btn-outline-dark btn-sm mb-3" (click)="onNavToOrderDetails()"
-      [disabled]="cartDetails==null">Comprar</button>
+      [disabled]="cartDetails==null || checkStatusCartDetails()">Comprar</button>
   </div>
 </div>

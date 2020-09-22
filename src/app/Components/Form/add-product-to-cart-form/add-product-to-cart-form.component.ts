@@ -39,7 +39,7 @@ export class AddProductToCartFormComponent implements OnInit {
   setCartForm() {
     this.cartForm = this.addCartFormBuilder.group({
       product: [this.productToAdd, [Validators.required]],
-      quantity: [1, [Validators.required, Validators.min(0)]]
+      quantity: [1, [Validators.required, Validators.min(1)]]
     })
   }
 

@@ -23,6 +23,8 @@ import { CreditCardComponent } from './Components/Cart shopping/credit-card/cred
 import { ShoppingHistoryDetailsComponent } from './Components/Cart shopping/shopping-history-details/shopping-history-details.component';
 import { ImageCardListComponent } from './Components/Product/image-card-list/image-card-list.component';
 import { PageNotFoundComponent } from './Components/page-not-found/page-not-found.component';
+import { OrdersToPrepareComponent } from './Components/Cart shopping/orders-to-prepare/orders-to-prepare.component';
+import { OrdersDetailToPrepareComponent } from './Components/Cart shopping/orders-detail-to-prepare/orders-detail-to-prepare.component';
 
 const routes: Routes = [
     {
@@ -130,6 +132,16 @@ const routes: Routes = [
         path: 'shopping-history/order-details',
         component: ShoppingHistoryDetailsComponent,
         canActivate: [UserAuthGuardService || AdminAuthGuardService]
+    },
+    {
+        path: 'orders',
+        component: OrdersToPrepareComponent,
+        canActivate: [AdminAuthGuardService]
+    },
+    {
+        path: 'orders/order-details',
+        component: OrdersDetailToPrepareComponent,
+        canActivate: [AdminAuthGuardService]
     },
     {
         path: '**',

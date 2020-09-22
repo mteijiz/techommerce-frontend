@@ -21,22 +21,22 @@ export class KeycloakSecurityService {
     await this.keycloak.init({
       //onLoad:'login-required'
       onLoad: 'check-sso'
-    }).success((auth) => {
+    }).then((auth) => {
       console.log("auth: ", auth);
       
       localStorage.setItem("token", this.keycloak.token);
       localStorage.setItem("refresh-token", this.keycloak.refreshToken);
       setTimeout(() => {
-        this.keycloak.updateToken(60).success((refreshed) => {
+        this.keycloak.updateToken(60).then((refreshed) => {
           if (refreshed) {
             console.debug('Token refreshed' + refreshed);
           } else {
           }
-        }).error(() => {
+        }).catch(() => {
           console.error('Failed to refresh token');
         });
       }, 40000)
-    }).error(() => {
+    }).catch(() => {
       console.error("Authenticated Failed");
     });
     console.log(this.keycloak.token);

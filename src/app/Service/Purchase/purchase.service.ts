@@ -11,7 +11,9 @@ export class PurchaseService {
   private baseUrl = 'http://localhost:8080' + '/purchase/';
 
   private addPurchaseUrl = this.baseUrl + 'add';
-  private getOrdersUrl = this.baseUrl + 'getOrders'
+  private getOrdersUrl = this.baseUrl + 'getOrders';
+  private getAllOrderUrl = this.baseUrl + 'getAllOrders';
+  private changeStatusUrl = this.baseUrl + 'changeStatus/'
 
   private refreshCartValue = new Subject<void>();
 
@@ -34,6 +36,14 @@ export class PurchaseService {
 
   getOrderOfUser() : Observable<any> {
     return this.http.get<any>(this.getOrdersUrl);
+  }
+
+  getAllOrders() {
+    return this.http.get<any>(this.getAllOrderUrl);
+  }
+
+  changeStatus(purchaseOrderId: any) {
+    return this.http.get<any>(`${this.changeStatusUrl}${purchaseOrderId}`);
   }
 
 }

@@ -26,6 +26,8 @@ export class UpdateProductComponent implements OnInit {
   public subcategoryListFiltered: Subcategory[];
   public productImages: File[] = [];
   public product: Product;
+  //public categoryIndex;
+  //public subcategoryIndex;
 
   constructor(
     private crudProduct: ProductService,
@@ -84,10 +86,10 @@ export class UpdateProductComponent implements OnInit {
       console.log("ngOnInit: ", JSON.stringify(history.state));
       localStorage.setItem("product", JSON.stringify(history.state));
     }
-    this.setProductFormValues();
     this.getAllBrands();
     this.getAllCategories();
     this.getAllSubcategories();
+    this.setProductFormValues();
   }
 
   setProductFormValues(){

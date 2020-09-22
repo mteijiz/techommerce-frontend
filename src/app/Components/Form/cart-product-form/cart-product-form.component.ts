@@ -24,7 +24,7 @@ export class CartProductFormComponent implements OnInit {
   ngOnInit() {
     this.cartForm = this.addCartFormBuilder.group({
       cartDetail: [this.cartDetail, [Validators.required]],
-      newQuantity: [this.cartDetail.quantity, [Validators.required, Validators.min(0), ValidationService.noDecimalValidator]]
+      newQuantity: [this.cartDetail.quantity, [Validators.required, Validators.min(1), ValidationService.noDecimalValidator]]
     })
   }
 

@@ -1,0 +1,46 @@
+<div class="container">
+  <hr>
+  <h2 class="title">Detalles de compra</h2>
+  <hr>
+  <div *ngIf="errorMessage" class="text-center">
+    <label class="text-danger">{{errorMessage}}</label>
+    <hr>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-hover ">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Imagen</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Cantidad</th>
+          <!--<th scope="col">Change</th>-->
+          <th scope="col">Precio ($)</th>
+          <th scope="col">Total</th>
+          <th scope="col">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let details of purchaseOrder.orderDetails">
+          <td><img
+              src="{{'data:' + details.product.productImage[0].imageType + ';base64,' + details.product.productImage[0].imageBytes}}"
+              width="75" height="75" class="ml-lg-5 order-1 order-lg-2"></td>
+          <td>{{details.product.productName}}</td>
+          <td>{{details.quantity}}</td>
+          <!--<td><input type="number" placeholder="New quantity" value="cartDetail.quantity"></td>-->
+          <td>{{details.unitPrice | number:'1.2-2'}}</td>
+          <td>{{details.totalPrice | number:'1.2-2'}}</td>
+          <td>
+              <div *ngIf="details.status; else notPrepared" >
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </div>
+              <ng-template #notPrepared>
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </ng-template>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <button class="btn btn-outline-dark mb-4" type="button" (click)="changeStatusToReady()">Pedido listo</button>
+  <button class="btn btn-outline-dark mb-4" type="button" (click)="goBack()">Atrás</button>
+</div>

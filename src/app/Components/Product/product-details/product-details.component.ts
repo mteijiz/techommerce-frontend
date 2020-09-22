@@ -47,7 +47,7 @@ export class ProductDetailsComponent implements OnInit {
   setCartForm(){
     this.cartForm = this.addCartFormBuilder.group({
       product: [this.product, [Validators.required]],
-      quantity: ['', [Validators.required, Validators.min(0), ValidationService.noDecimalValidator]]
+      quantity: ['', [Validators.required, Validators.min(1), ValidationService.noDecimalValidator]]
     })
   }
 
