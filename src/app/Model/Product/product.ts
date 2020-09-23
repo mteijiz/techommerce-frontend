@@ -12,13 +12,10 @@ export class Product {
     public productDescription : String;
     public productPrice : number;
     public productQuantity : number;
-    public productRate : number;
-    public productQuantityOfVotes: number;
     public productBrand : Brand;
     public productCategory : Category;
     public productSubcategory : Subcategory;
     public productState : Boolean;
     public productImage : Image[];
-    public productTotalPoints : number;
 
 }
