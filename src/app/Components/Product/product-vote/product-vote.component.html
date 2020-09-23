@@ -1,7 +1,0 @@
-<form [formGroup]="voteForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <input type="number" min="0" step="1" formControlName="vote" />
-    <app-validation-messages [validation]="voteForm.get('vote')"></app-validation-messages>
-  </div>
-  <button [disabled]="!voteForm.valid" class="btn btn-outline-dark btn-sm ml-2" type="submit">Votar</button>
-</form>

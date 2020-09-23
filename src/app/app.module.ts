@@ -34,7 +34,6 @@ import { ProductDetailsComponent } from './Components/Product/product-details/pr
 import { HomeComponent } from './Components/Home/home/home.component';
 import { ProductFilterComponent } from './Components/Product/product-filter/product-filter.component';
 import { ProductCarouselComponent } from './Components/Product/product-carousel/product-carousel.component';
-import { ProductVoteComponent } from './Components/Product/product-vote/product-vote.component';
 import { ShoppingHistoryComponent } from './Components/Cart shopping/shopping-history/shopping-history.component';
 import { CreditCardComponent } from './Components/Cart shopping/credit-card/credit-card.component';
 import { ShoppingHistoryDetailsComponent } from './Components/Cart shopping/shopping-history-details/shopping-history-details.component';
@@ -78,7 +77,6 @@ export function kcFactory(kcSecurity:KeycloakSecurityService){
     HomeComponent,
     ProductFilterComponent,
     ProductCarouselComponent,
-    ProductVoteComponent,
     ShoppingHistoryComponent,
     CreditCardComponent,
     ShoppingHistoryDetailsComponent,

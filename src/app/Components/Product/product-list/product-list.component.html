@@ -2,14 +2,11 @@
   <div *ngIf="errorMessage" class="text-center">
     <hr>
     <label class="text-danger">{{errorMessage}}</label>
+    <hr>
   </div>
   <div class="row">
-    <button class="btn btn-outline-dark ml-2 btn-sm" (click)="openFilterFormModal()">Filtrar</button>
+    <button class="btn btn-outline-dark ml-2 btn-sm my-4" (click)="openFilterFormModal()">Filtrar</button>
   </div>
-  <!--<div class="row">
-    <app-product-filter class="container-fluid"></app-product-filter>
-  </div>
-  <hr>-->
   <div class="row my-2">
     <div class="col-lg-8 mx-auto"
       *ngFor="let product of productListFiltered | paginate: { itemsPerPage: 5, currentPage: p }">
