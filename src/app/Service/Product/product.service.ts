@@ -13,9 +13,7 @@ export class ProductService {
   postProductUrl = this.baseUrl + 'add';
   getAllProductsUrl = this.baseUrl + 'getAll';
   getActiveProductsUrl = this.baseUrl + 'getActive';
-  updateProductStateUrl = this.baseUrl + 'updateState';
   updateProductUrl = this.baseUrl + 'update'; 
-  addVoteToProductUrl = this.baseUrl + 'addVote';
   getProductByIdUrl = this.baseUrl + 'getById/';
   getProductsByFilterUrl = this.baseUrl + 'filter';
 
@@ -31,20 +29,12 @@ export class ProductService {
     return this.http.get<Product[]>(this.getAllProductsUrl);
   }
 
-  updateProductState(product: Product) {
-   return this.http.put<any>(this.updateProductStateUrl, product);
-  }
-
   getAllActiveProducts() {
     return this.http.get<Product[]>(this.getActiveProductsUrl);
   }
 
   updateProduct(product: Product) {
     return this.http.put<any>(this.updateProductUrl, product);
-  }
-
-  addVoteToProduct(voteOfProduct: any) {
-    return this.http.put<any>(this.addVoteToProductUrl, voteOfProduct);
   }
 
   getProductById(productId: any) {

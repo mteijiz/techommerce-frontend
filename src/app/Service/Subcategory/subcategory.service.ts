@@ -12,7 +12,6 @@ export class SubcategoryService {
 
   getAllSubcategoriesUrl = this.baseUrl + 'getAll/';
   postSubcategoryUrl = this.baseUrl + 'add/';
-  changeStateSubcategoryUrl = this.baseUrl + 'updateState/';
   updateSubcategoryUrl = this.baseUrl + 'update/';
   getSubcategoriesByCategoryUrl = this.baseUrl + 'getByCategory/';
   getActiveSubcategoriesUrl = this.baseUrl + 'getActive';
@@ -27,10 +26,6 @@ export class SubcategoryService {
 
   addSubcategory(subcategory : Subcategory) : Observable<any>{
     return this.http.post<any>(this.postSubcategoryUrl, subcategory);
-  }
-
-  updateSubcategoryState(subcategory: Subcategory) {
-    return this.http.put<any>(this.changeStateSubcategoryUrl, subcategory);
   }
 
   updateSubcategory(subcategory: Subcategory) {

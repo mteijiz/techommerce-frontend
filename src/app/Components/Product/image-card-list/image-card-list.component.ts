@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Image } from '../../../Model/Image/image'
 import { ImageService } from 'src/app/Service/Image/image.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -6,6 +6,7 @@ import { ModalDeleteImageComponent } from '../../Modal/modal-delete-image/modal-
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProductService } from 'src/app/Service/Product/product.service';
+import { resetFakeAsyncZone } from '@angular/core/testing';
 
 @Component({
   selector: 'app-image-card-list',
@@ -19,6 +20,8 @@ export class ImageCardListComponent implements OnInit {
   private errorMessage : String;
   public newProductImageToUpload: File[] = [];
   public newMainProductImage: File[] = [];
+  @ViewChild('mainImage', {static: false}) mainImage : ElementRef;
+  @ViewChild('secondaryImages', {static: false}) secondaryImages : ElementRef;
 
   constructor(
     private imageService: ImageService,
@@ -29,6 +32,8 @@ export class ImageCardListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.newMainProductImage = [];
+    this.newProductImageToUpload = [];
     if (localStorage.getItem("product") != null)
       this.getLocalStorage();
     else {
@@ -109,7 +114,12 @@ export class ImageCardListComponent implements OnInit {
         }
       ) 
     }
-    
+    this.reset();
+  }
+
+  reset(){
+    this.mainImage.nativeElement.value = "";
+    this.secondaryImages.nativeElement.value = "";
   }
 
   openImageDeleteFormModal(image) {

@@ -22,20 +22,12 @@ export class ImageService {
     return this.http.post<any>(`${this.postImageUrl}${productId}`, imageData);
   }
 
-  getAllProductImages(productId: number): Observable<any> {
-    return this.http.get<any>(`${this.getProductImageUrl}${productId}`);
-  }
-
   deleteImage(imageId) : Observable<any>{
     return this.http.delete<any>(`${this.deleteImageUrl}${imageId}`);
   }
 
   uploadMainImage(mainImageFormData: FormData, productId: any) {
     return this.http.post<any>(`${this.postMainImageUrl}${productId}`, mainImageFormData);
-  }
-
-  getMainImage(productId: any) {
-    return this.http.get<any>(`${this.getProductMainImageUrl}${productId}`);
   }
 
   changeMainImage(imageForm: any) : Observable<any> {

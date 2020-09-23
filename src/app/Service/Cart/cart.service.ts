@@ -10,8 +10,6 @@ export class CartService {
 
   baseUrl = 'http://localhost:8080' + '/carts/';
 
-  postCartUrl = this.baseUrl + 'add';
-  getCartDetailsUrl = this.baseUrl + 'getDetails';
   getUserCart = this.baseUrl + 'get';
   postCartWithQuantityUrl = this.baseUrl + 'addWithQuantity';
   deleteProductFromCartUrl = this.baseUrl + 'deleteFromCart/';
@@ -31,10 +29,6 @@ export class CartService {
         this.refreshCartValue.next();
       })
     );
-  }
-
-  getCartDetails(): Observable<any> {
-    return this.http.get<any>(this.getCartDetailsUrl);
   }
 
   deleteProductFromCart(cartDetailId: any) {

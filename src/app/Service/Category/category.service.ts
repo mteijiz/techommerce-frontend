@@ -14,7 +14,6 @@ export class CategoryService {
   postUrl = this.baseUrl + 'add';
   getAllCategoriesUrl = this.baseUrl + 'getAll';
   updateUrl = this.baseUrl + 'update';
-  updateStateUrl = this.baseUrl + 'updateState';
   getActiveCategoriesUrl = this.baseUrl + 'getActive'
 
   constructor(private http:HttpClient) { }
@@ -29,10 +28,6 @@ export class CategoryService {
 
   updateCategory(category : Category) : Observable<any>{
     return this.http.put<any>(this.updateUrl, category);
-  }
-  
-  updateCategoryState(category : Category) : Observable<any>{
-    return this.http.put<any>(this.updateStateUrl, category);
   }
 
   getAllActiveCategory() {

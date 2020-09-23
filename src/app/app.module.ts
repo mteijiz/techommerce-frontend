@@ -32,7 +32,6 @@ import { RequestInterceptorService } from './Service/Request-interceptor/request
 import { CartComponent } from './Components/Cart shopping/cart/cart.component';
 import { ProductDetailsComponent } from './Components/Product/product-details/product-details.component';
 import { HomeComponent } from './Components/Home/home/home.component';
-import { ProductFilterComponent } from './Components/Product/product-filter/product-filter.component';
 import { ProductCarouselComponent } from './Components/Product/product-carousel/product-carousel.component';
 import { ShoppingHistoryComponent } from './Components/Cart shopping/shopping-history/shopping-history.component';
 import { CreditCardComponent } from './Components/Cart shopping/credit-card/credit-card.component';
@@ -75,7 +74,6 @@ export function kcFactory(kcSecurity:KeycloakSecurityService){
     CartComponent,
     ProductDetailsComponent,
     HomeComponent,
-    ProductFilterComponent,
     ProductCarouselComponent,
     ShoppingHistoryComponent,
     CreditCardComponent,

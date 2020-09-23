@@ -33,15 +33,4 @@ export class ProductTableComponent implements OnInit {
     )
   }
 
-  onClick(product : Product){
-    console.log(product);
-    this.productService.updateProductState(product).subscribe(
-      data=>{
-        this.ngOnInit();
-      },
-      error=>{
-      }
-    )
-  }
-
 }
