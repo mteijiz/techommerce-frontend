@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let purchaseOrder of purchaseOrders">
+        <tr *ngFor="let purchaseOrder of purchaseOrders | paginate: { itemsPerPage: 10, currentPage: p }">
           <td>{{purchaseOrder.purchaseDate}}</td>
           <td>{{purchaseOrder.quantity}}</td>
           <td>{{purchaseOrder.total | number:'1.2-2'}}</td>
@@ -30,5 +30,8 @@
         </tr>
       </tbody>
     </table>
+    <div class="container d-flex justify-content-center">
+      <pagination-controls class="my-pagination" (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+    </div>
   </div>
 </div>

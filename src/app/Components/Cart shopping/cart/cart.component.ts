@@ -58,8 +58,6 @@ export class CartComponent implements OnInit {
       this.cartDetails = this.cart.details;
       this.errorMessage = null;
       this.totalAmount = this.cart.totalAmount;
-      if(this.cart.quantityOfProduct == 0)
-          this.errorMessage = "No se agregaron productos al carrito"
     },
     error => {
       this.errorMessage = error.error.message;

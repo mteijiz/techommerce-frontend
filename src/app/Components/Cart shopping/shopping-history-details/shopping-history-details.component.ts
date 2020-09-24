@@ -8,15 +8,27 @@ import { Router } from '@angular/router';
 })
 export class ShoppingHistoryDetailsComponent implements OnInit {
 
-  purchaseOrder;
+  private purchaseOrder;
 
   constructor(
     private router : Router
   ) { }
 
   ngOnInit() {
-    this.purchaseOrder = history.state;
-    console.log(this.purchaseOrder);
+    if (localStorage.getItem("purchaseOrder") != null)
+      this.getLocalStorage();
+    else {
+      this.purchaseOrder = history.state;
+      localStorage.setItem("purchaseOrder", JSON.stringify(history.state));
+    }
+  }
+
+  getLocalStorage() {
+    this.purchaseOrder = JSON.parse(localStorage.getItem("purchaseOrder"));
+  }
+
+  ngOnDestroy(){
+    localStorage.removeItem("purchaseOrder");
   }
 
   goBack() {

@@ -20,7 +20,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let cartDetail of cartDetails">
+        <tr *ngFor="let cartDetail of cartDetails | paginate: { itemsPerPage: 10, currentPage: p }">
           <td><button *ngIf="!cartDetail.state" class="btn btn-outline-danger ml-2 btn-sm" (click)="openWarningProductModal(cartDetail)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button></td>
           <td><button *ngIf="cartDetail.unitPrice != cartDetail.product.productPrice" class="btn btn-outline-danger ml-2 btn-sm" (click)="openWarningPriceModal(cartDetail)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button></td>
           <td><img
@@ -46,6 +46,9 @@
         </tr>
       </tbody>
     </table>
+    <div class="container d-flex justify-content-center">
+      <pagination-controls class="my-pagination" (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+    </div>
   <div class="row container">
     <button class="btn btn-outline-dark btn-sm mb-3" (click)="onNavToOrderDetails()"
       [disabled]="cartDetails==null || checkStatusCartDetails()">Comprar</button>

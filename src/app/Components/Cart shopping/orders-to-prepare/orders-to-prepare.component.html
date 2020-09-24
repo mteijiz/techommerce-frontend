@@ -10,7 +10,8 @@
     <table class="table table-hover ">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">Fecha</th>
+          <th scope="col">Fecha de compra</th>
+          <th scope="col">Comprador</th>
           <th scope="col">Cantidad</th>
           <th scope="col">Total</th>
           <th scope="col">Estado</th>
@@ -18,8 +19,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let purchaseOrder of purchaseOrders">
+        <tr *ngFor="let purchaseOrder of purchaseOrders | paginate: { itemsPerPage: 10, currentPage: p }">
           <td>{{purchaseOrder.purchaseDate}}</td>
+          <td>{{purchaseOrder.userName}}</td>
           <td>{{purchaseOrder.quantity}}</td>
           <td>{{purchaseOrder.total | number:'1.2-2'}}</td>
           <td>
@@ -39,5 +41,8 @@
         </tr>
       </tbody>
     </table>
+    <div class="container d-flex justify-content-center">
+      <pagination-controls class="my-pagination" (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+    </div>
   </div>
 </div>

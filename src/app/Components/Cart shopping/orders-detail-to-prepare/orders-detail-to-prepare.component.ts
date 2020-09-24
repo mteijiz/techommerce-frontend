@@ -9,27 +9,40 @@ import { PurchaseService } from 'src/app/Service/Purchase/purchase.service';
 })
 export class OrdersDetailToPrepareComponent implements OnInit {
 
-  purchaseOrder;
+  private purchaseOrder;
 
   constructor(
-    private router : Router,
-    private purchaseOrderService : PurchaseService
+    private router: Router,
+    private purchaseOrderService: PurchaseService
   ) { }
 
   ngOnInit() {
-    this.purchaseOrder = history.state;
-    console.log(this.purchaseOrder);
+    if (localStorage.getItem("purchaseOrder") != null)
+      this.getLocalStorage();
+    else {
+      this.purchaseOrder = history.state;
+      localStorage.setItem("purchaseOrder", JSON.stringify(history.state));
+    }
+  }
+
+  getLocalStorage() {
+    this.purchaseOrder = JSON.parse(localStorage.getItem("purchaseOrder"));
+  }
+
+  ngOnDestroy(){
+    localStorage.removeItem("purchaseOrder");
   }
 
   goBack() {
     this.router.navigateByUrl('/orders');
   }
 
-  changeStatusToReady(){
+  changeStatusToReady() {
     this.purchaseOrderService.changeStatus(this.purchaseOrder.purchaseOrderId).subscribe(
       data => {
         console.log(data);
         this.purchaseOrder = data;
+        this.updateLocalStorage(this.purchaseOrder);
       },
       error => {
         console.log(error);
@@ -37,15 +50,20 @@ export class OrdersDetailToPrepareComponent implements OnInit {
     );
   }
 
-  changeDetailStatus(details){
+  changeDetailStatus(details) {
     this.purchaseOrderService.changeStatusOfDetail(this.purchaseOrder.purchaseOrderId, details.purchaseOrderDetailsId).subscribe(
       data => {
         console.log(data);
         this.purchaseOrder = data;
+        this.updateLocalStorage(this.purchaseOrder);
       },
       error => {
         console.log(error);
       }
     );
+  }
+
+  updateLocalStorage(purchaseOrder){
+    localStorage.setItem("purchaseOrder", JSON.stringify(purchaseOrder));
   }
 }

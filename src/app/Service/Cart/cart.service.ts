@@ -10,7 +10,8 @@ export class CartService {
 
   baseUrl = 'http://localhost:8080' + '/carts/';
 
-  getUserCart = this.baseUrl + 'get';
+  getUserCartUrl = this.baseUrl + 'get';
+  getQuantityOfCartUrl = this.baseUrl + 'getQuantity';
   postCartWithQuantityUrl = this.baseUrl + 'addWithQuantity';
   deleteProductFromCartUrl = this.baseUrl + 'deleteFromCart/';
   updateQuantityOfProductUrl = this.baseUrl + 'updateQuantityOfAProductInACart';
@@ -41,7 +42,11 @@ export class CartService {
   }
 
   getCart() {
-    return this.http.get<any>(this.getUserCart);
+    return this.http.get<any>(this.getUserCartUrl);
+  }
+
+  getQuantityOfCart() {
+    return this.http.get<any>(this.getQuantityOfCartUrl);
   }
 
   updateQuantityOfAProductInACart(cartForm) {

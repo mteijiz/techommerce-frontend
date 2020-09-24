@@ -18,7 +18,7 @@ export class NavbarShopComponent implements OnInit {
   private categoryList : Category[];
   private errorMessage : String;
   private quantityOfProductInCart : number;
-  private cart : Cart;
+  private cart;
   
 
   constructor(
@@ -59,11 +59,11 @@ export class NavbarShopComponent implements OnInit {
   }
 
   getQuantityOfProductInACart(){
-    this.cartService.getCart().subscribe(
+    this.cartService.getQuantityOfCart().subscribe(
       data => {
         console.log("Data de cart: ", data);
         this.cart = data;
-        this.quantityOfProductInCart = this.cart.quantityOfProduct;
+        this.quantityOfProductInCart = this.cart.quantity;
         this.errorMessage = null;
       },
       error =>{

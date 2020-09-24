@@ -21,7 +21,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let details of purchaseOrder.orderDetails">
+        <tr *ngFor="let details of purchaseOrder.orderDetails | paginate: { itemsPerPage: 5, currentPage: p }">
           <td><img
               src="{{'data:' + details.product.productImage[0].imageType + ';base64,' + details.product.productImage[0].imageBytes}}"
               width="75" height="75" class="ml-lg-5 order-1 order-lg-2"></td>
@@ -44,7 +44,10 @@
         </tr>
       </tbody>
     </table>
+    <div class="container d-flex justify-content-center">
+      <pagination-controls class="my-pagination" (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+    </div>
   </div>
-  <button class="btn btn-outline-dark mb-4" type="button" (click)="changeStatusToReady()">Pedido listo</button>
-  <button class="btn btn-outline-dark mb-4" type="button" (click)="goBack()">Atrás</button>
+  <button class="btn btn-outline-dark mb-4 mr-2" type="button" (click)="changeStatusToReady()">Pedido listo</button>
+  <button class="btn btn-outline-dark mb-4 ml-2" type="button" (click)="goBack()">Atrás</button>
 </div>
