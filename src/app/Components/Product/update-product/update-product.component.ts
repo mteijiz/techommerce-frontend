@@ -188,6 +188,10 @@ export class UpdateProductComponent implements OnInit {
     
   }
 
+  onSelectBrand(event){
+    console.log(event);
+  }
+
   onSelect(categoryId: number) {
     console.log("on select: ", categoryId);
     this.subcategoryListFiltered = this.subcategoryList.filter((subcategoryList) => subcategoryList.category.categoryId == categoryId);

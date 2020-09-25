@@ -53,8 +53,8 @@
     <div class="form-group row mb-3">
       <label class="col-sm-2 col-form-label" for="inputGroupSelect01">Marca</label>
       <div class="col-sm-10">
-        <select class="custom-select" id="inputGroupSelect01" formControlName="productBrand">
-          <option *ngFor="let brand of brandList" [ngValue]="brand">{{brand.brandName}}</option>
+        <select class="custom-select" id="inputGroupSelect01" formControlName="productBrand" (change)="onSelectBrand(+$event.target.selectedOptions[0].dataset.value)">
+          <option *ngFor="let brand of brandList" [ngValue]="brand" [attr.data-value]="brand.brandId">{{brand.brandName}}</option>
         </select>
       </div>
       <app-validation-messages [validation]="productCreateForm.get('productBrand')"></app-validation-messages>

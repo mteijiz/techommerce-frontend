@@ -188,4 +188,8 @@ export class AddProductComponent implements OnInit {
     this.router.navigateByUrl('/product');
   }
 
+  onSelectBrand(event){
+    console.log(event);
+  }
+
 }
