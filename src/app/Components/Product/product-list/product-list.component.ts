@@ -72,11 +72,17 @@ export class ProductListComponent implements OnInit {
 
   openFilterFormModal() {
     const modalRef = this.modalService.open(ModalProductFilterComponent);
-    //modalRef.componentInstance.image = image;
     modalRef.result.then((result) => {
+      console.log("cerro por result");
+      this.productListFiltered = result;
+      this.errorMessage = null;
     }).catch((error) => {
-      this.productListFiltered = [this.productList[0]];
-      console.log(this.productList);
+      this.errorMessage = error;
+      this.productListFiltered = [];
     });
+  }
+
+  resetFilter(){
+    this.productListFiltered = this.productList;
   }
 }

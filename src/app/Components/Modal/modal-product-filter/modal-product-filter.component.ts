@@ -20,6 +20,7 @@ export class ModalProductFilterComponent implements OnInit {
   public errorMessage : String;
   public subcategoryList : Subcategory[];
   public categoryList : Category[];
+  public productList;
 
   constructor(
     private activeModal: NgbActiveModal,
@@ -132,16 +133,23 @@ export class ModalProductFilterComponent implements OnInit {
     console.log(this.filterForm.value);
     this.productService.getProductsByFilter(this.filterForm.value).subscribe(
       data => {
-        console.log('Success ', data);
+        this.productList = data;
+        this.errorMessage = null;
+        this.closeModal();
       },
       error => {
-        console.log('Fail', error);
+        console.log("modal",error);
+        this.errorMessage = error.error.message;
+        this.closeModal();
       }
     )
   }
 
   closeModal() {
-    this.activeModal.close('Modal Closed');
+    if(this.errorMessage != null)
+      this.activeModal.dismiss(this.errorMessage);
+    else
+      this.activeModal.close(this.productList);
   }
 
 }

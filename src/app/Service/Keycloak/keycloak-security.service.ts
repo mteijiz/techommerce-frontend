@@ -12,18 +12,14 @@ export class KeycloakSecurityService {
   constructor() { }
 
   async init() {
-    console.log('INIT : Service keycloak security ');
     this.keycloak = new Keycloak({
       url: 'http://localhost:8180/auth',
       realm: 'techommerce',
       clientId: 'angular-app'
     });
     await this.keycloak.init({
-      //onLoad:'login-required'
       onLoad: 'check-sso'
-    }).then((auth) => {
-      console.log("auth: ", auth);
-      
+    }).then((auth) => {      
       localStorage.setItem("token", this.keycloak.token);
       localStorage.setItem("refresh-token", this.keycloak.refreshToken);
       setTimeout(() => {
@@ -37,9 +33,7 @@ export class KeycloakSecurityService {
         });
       }, 40000)
     }).catch(() => {
-      console.error("Authenticated Failed");
     });
-    console.log(this.keycloak.token);
   }
 
 }

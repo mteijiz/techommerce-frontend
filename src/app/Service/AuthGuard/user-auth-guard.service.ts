@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Route, Router, CanActivate } from '@angular/router';
+import { CanActivate } from '@angular/router';
 import { KeycloakSecurityService } from '../Keycloak/keycloak-security.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserAuthGuardService implements CanActivate {
-    constructor(private keycloakSecurityService: KeycloakSecurityService, private router: Router) {
+    constructor(private keycloakSecurityService: KeycloakSecurityService) {
     }
 
     canActivate(): boolean {

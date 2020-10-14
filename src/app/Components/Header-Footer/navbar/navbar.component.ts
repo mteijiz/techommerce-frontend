@@ -23,14 +23,7 @@ export class NavbarComponent implements OnInit{
   }
 
   onLogout(){
-    this.securityService.keycloak.logout().then(
-      data => {
-        this.router.navigateByUrl('/home');
-        console.log("Success de navbar con logout");
-      },
-      error => {
-        console.log("Success de navbar con logout");
-      });
+    this.securityService.keycloak.logout();
   }
 
   onRegister(){
