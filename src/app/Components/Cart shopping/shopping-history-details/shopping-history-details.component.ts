@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
 })
 export class ShoppingHistoryDetailsComponent implements OnInit {
 
-  private purchaseOrder;
+  public purchaseOrder;
+  public p : any;
 
   constructor(
     private router : Router

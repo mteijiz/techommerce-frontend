@@ -9,9 +9,9 @@ import { ProductService } from 'src/app/Service/Product/product.service';
 })
 export class ProductTableComponent implements OnInit {
 
-  private errorMessage: String;
-  private productList: Product[];
-  
+  public errorMessage: String;
+  public productList: Product[];
+  public p : any;
 
   constructor(
     private productService: ProductService

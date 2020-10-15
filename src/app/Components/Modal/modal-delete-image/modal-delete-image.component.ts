@@ -9,10 +9,10 @@ import { ImageService } from 'src/app/Service/Image/image.service';
 })
 export class ModalDeleteImageComponent implements OnInit {
 
-  @Input() private image;
+  @Input() public image;
 
   constructor(
-    private activeModal: NgbActiveModal,
+    public activeModal: NgbActiveModal,
     private imageService: ImageService
   ) { }
 

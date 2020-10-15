@@ -9,9 +9,10 @@ import { SubcategoryService } from 'src/app/Service/Subcategory/subcategory.serv
 })
 export class SubcategoryTableComponent implements OnInit {
 
-  private errorMessage: String;
-  private subcategoryList: Subcategory[];
+  public errorMessage: String;
+  public subcategoryList: Subcategory[];
   private stateMessage : String;
+  public p : any;
 
   constructor(
     private subcategoryService : SubcategoryService

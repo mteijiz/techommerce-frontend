@@ -13,8 +13,8 @@ import { Router } from '@angular/router';
 })
 export class AddSubcategoryComponent implements OnInit {
 
-  private errorMessage : String;
-  private categoryList : Category[];
+  public errorMessage : String;
+  public categoryList : Category[];
 
   constructor(
     private createSubcategoryFormBuilder : FormBuilder,
@@ -23,7 +23,7 @@ export class AddSubcategoryComponent implements OnInit {
     private router : Router
   ) { }
 
-  private subcategoryCreateForm = this.createSubcategoryFormBuilder.group({
+  public subcategoryCreateForm = this.createSubcategoryFormBuilder.group({
     subcategoryCode: ['', [Validators.required, Validators.maxLength(10)]],
     subcategoryName: ['', [Validators.required, Validators.maxLength(15)]],
     subcategoryDescription: ['', [Validators.maxLength(500)]],

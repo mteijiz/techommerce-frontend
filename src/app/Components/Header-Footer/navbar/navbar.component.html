@@ -23,7 +23,7 @@
         <li class="nav-item dropdown" *ngIf="securityService.keycloak.authenticated">
           <a class="nav-link dropdown-toggle" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
-            {{securityService.keycloak.tokenParsed.email}}
+            {{securityService.keycloak.tokenParsed['email']}}
             <i class="fa fa-user-circle" aria-hidden="true"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="profileDropdown">

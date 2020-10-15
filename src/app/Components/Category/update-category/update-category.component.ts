@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class UpdateCategoryComponent implements OnInit {
 
-  private errorMessage : String;
+  public errorMessage : String;
   private category: Category;
 
   constructor(
@@ -20,7 +20,7 @@ export class UpdateCategoryComponent implements OnInit {
     private router : Router
   ) { }
 
-  private categoryUpdateForm : FormGroup;
+  public categoryUpdateForm : FormGroup;
 
   get categoryId(){
     return this.categoryUpdateForm.get('categoryId');

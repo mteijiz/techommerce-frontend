@@ -16,8 +16,8 @@ import { resetFakeAsyncZone } from '@angular/core/testing';
 export class ImageCardListComponent implements OnInit {
 
   //@Input() private product;
-  private product;
-  private errorMessage : String;
+  public product;
+  public errorMessage : String;
   public newProductImageToUpload: File[] = [];
   public newMainProductImage: File[] = [];
   @ViewChild('mainImage', {static: false}) mainImage : ElementRef;

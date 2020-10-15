@@ -7,29 +7,27 @@ import { KeycloakSecurityService } from 'src/app/Service/Keycloak/keycloak-secur
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit{
+export class NavbarComponent implements OnInit {
 
   constructor(
-    private securityService:KeycloakSecurityService,
-    private router : Router
+    public securityService: KeycloakSecurityService,
+    private router: Router
   ) { }
-  
-  ngOnInit(){
-    
+
+  ngOnInit() {
+    console.log(this.securityService.keycloak.tokenParsed['email']);
   }
 
-  onLogin(){
+  onLogin() {
     this.securityService.keycloak.login();
   }
 
-  onLogout(){
+  onLogout() {
     this.securityService.keycloak.logout();
   }
 
-  onRegister(){
+  onRegister() {
     this.securityService.keycloak.register();
   }
-
-  
 
 }

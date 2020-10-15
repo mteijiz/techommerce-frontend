@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AddBrandComponent implements OnInit {
 
-  private errorMessage : String;
+  public errorMessage : String;
 
   constructor(
     private createBrandFormBuilder : FormBuilder,
@@ -18,7 +18,7 @@ export class AddBrandComponent implements OnInit {
     private router : Router
   ) { }
 
-  private brandCreateForm = this.createBrandFormBuilder.group({
+  public brandCreateForm = this.createBrandFormBuilder.group({
     brandCode: ['', [Validators.required, Validators.maxLength(10)]],
     brandName: ['', [Validators.required, Validators.maxLength(15)]],
     brandDescription: ['', [Validators.maxLength(500)]],

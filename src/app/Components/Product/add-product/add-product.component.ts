@@ -20,11 +20,11 @@ import { ValidationService } from '../../../Service/Validations/validation.servi
 })
 export class AddProductComponent implements OnInit {
 
-  private errorMessage: String;
-  private brandList: Brand[];
-  private categoryList: Category[];
+  public errorMessage: String;
+  public brandList: Brand[];
+  public categoryList: Category[];
   private subcategoryList: Subcategory[];
-  private subcategoryListFiltered: Subcategory[];
+  public subcategoryListFiltered: Subcategory[];
   private productImages: File[] = [];
   private mainProductImage : File[] = [];
 
@@ -38,7 +38,7 @@ export class AddProductComponent implements OnInit {
     private router : Router
   ) { }
 
-  private productCreateForm = this.createProductFormBuilder.group({
+  public productCreateForm = this.createProductFormBuilder.group({
     productCode: ['', [Validators.required, Validators.maxLength(10)]],
     productName: ['', [Validators.required, Validators.maxLength(15)]],
     productDescription: ['', [Validators.maxLength(1000)]],

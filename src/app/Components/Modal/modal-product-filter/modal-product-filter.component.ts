@@ -23,7 +23,7 @@ export class ModalProductFilterComponent implements OnInit {
   public productList;
 
   constructor(
-    private activeModal: NgbActiveModal,
+    public activeModal: NgbActiveModal,
     private crudBrand: BrandService,
     private crudSubcategory : SubcategoryService,
     private crudCategory : CategoryService,

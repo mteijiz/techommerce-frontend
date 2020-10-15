@@ -15,14 +15,13 @@ import { PurchaseService } from 'src/app/Service/Purchase/purchase.service';
 })
 export class NavbarShopComponent implements OnInit {
 
-  private categoryList : Category[];
+  public categoryList : Category[];
   private errorMessage : String;
-  private quantityOfProductInCart : number;
+  public quantityOfProductInCart : number;
   private cart;
   
-
   constructor(
-    private securityService:KeycloakSecurityService,
+    public securityService:KeycloakSecurityService,
     private crudCategory: CategoryService,
     private cartService: CartService,
     private purchaseService: PurchaseService

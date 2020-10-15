@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class UpdateBrandComponent implements OnInit {
 
-  private errorMessage : String;
+  public errorMessage : String;
   private brand: Brand;
 
   constructor(
@@ -20,7 +20,7 @@ export class UpdateBrandComponent implements OnInit {
     private router : Router
   ) { }
 
-  private brandUpdateForm;
+  public brandUpdateForm;
 
   get brandId(){
     return this.brandUpdateForm.get('brandId');

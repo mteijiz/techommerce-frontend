@@ -14,13 +14,13 @@ import { ValidationService } from 'src/app/Service/Validations/validation.servic
 })
 export class ProductDetailsComponent implements OnInit {
 
-  private product : Product;
-  private errorMessage : String;
-  private successfullMessage : String;
+  public product : Product;
+  public errorMessage : String;
+  public successfullMessage : String;
   private count = 0;
 
   constructor(
-    private securityService : KeycloakSecurityService,
+    public securityService : KeycloakSecurityService,
     private addCartFormBuilder : FormBuilder,
     private cartService : CartService,
     private previousPage : Location
@@ -28,7 +28,7 @@ export class ProductDetailsComponent implements OnInit {
     
   }
 
-  private cartForm : FormGroup;
+  public cartForm : FormGroup;
 
   get quantity(){
     return this.cartForm.get('quantity');

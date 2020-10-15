@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ProductCarouselComponent implements OnInit {
 
   @Input() private product;
-  private imageList;
+  public imageList;
 
   constructor() { }
 

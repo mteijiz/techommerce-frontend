@@ -15,10 +15,11 @@ import { ModalWarningProductComponent } from '../../Modal/modal-warning-product/
 })
 export class CartComponent implements OnInit {
 
-  private cart : Cart;
-  private cartDetails : CartDetails[];
-  private errorMessage : String;
-  private totalAmount : number;
+  public cart : Cart;
+  public cartDetails : CartDetails[];
+  public errorMessage : String;
+  public totalAmount : number;
+  public p : any;
 
   constructor(
     private cartService : CartService,

@@ -9,9 +9,10 @@ import { error } from 'protractor';
 })
 export class ShoppingHistoryComponent implements OnInit {
 
-  private purchaseOrders;
-  private errorMessage : String = null;
-
+  public purchaseOrders;
+  public errorMessage : String = null;
+  public p : any;
+  
   constructor(
     private purchaseService : PurchaseService
   ) { }

@@ -8,8 +8,9 @@ import { PurchaseService } from 'src/app/Service/Purchase/purchase.service';
 })
 export class OrdersToPrepareComponent implements OnInit {
 
-  private purchaseOrders;
-  private errorMessage : String = null;
+  public purchaseOrders;
+  public errorMessage : String = null;
+  public p : any;
 
   constructor(
     private purchaseService : PurchaseService

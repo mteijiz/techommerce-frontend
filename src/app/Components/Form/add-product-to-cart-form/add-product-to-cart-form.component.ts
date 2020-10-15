@@ -12,12 +12,12 @@ export class AddProductToCartFormComponent implements OnInit {
 
   @Input() private productToAdd;
   private cartForm: FormGroup;
-  private count = 0;
+  public count = 0;
 
   constructor(
     private cartService : CartService,
     private addCartFormBuilder: FormBuilder,
-    private securityService: KeycloakSecurityService
+    public securityService: KeycloakSecurityService
   ) { }
 
   ngOnInit() {

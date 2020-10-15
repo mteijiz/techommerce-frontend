@@ -13,9 +13,9 @@ import { Router } from '@angular/router';
 })
 export class UpdateSubcategoryComponent implements OnInit {
 
-  private errorMessage : String;
+  public errorMessage : String;
   private subcategory: Subcategory;
-  private categoryList : Category[] = new Array();
+  public categoryList : Category[] = new Array();
 
   constructor(
     private updateSubcategoryFormBuilder : FormBuilder,
@@ -24,7 +24,7 @@ export class UpdateSubcategoryComponent implements OnInit {
     private router : Router
   ) { }
 
-  private subcategoryUpdateForm : FormGroup;
+  public subcategoryUpdateForm : FormGroup;
 
   get subcategoryId(){
     return this.subcategoryUpdateForm.get('subcategoryId');

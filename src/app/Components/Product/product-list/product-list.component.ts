@@ -16,12 +16,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ProductListComponent implements OnInit {
 
-  private errorMessage: String;
-  private productList: Product[];
+  public errorMessage: String;
+  public productList: Product[];
   private cartDetail: CartDetails;
   private subscribe: any;
   private categoryName: String = null;
-  private productListFiltered: Product[];
+  public productListFiltered: Product[];
+  public p : any;
 
   private cartForm: FormGroup;
 

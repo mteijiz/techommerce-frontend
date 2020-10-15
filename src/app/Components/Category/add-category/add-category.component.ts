@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AddCategoryComponent implements OnInit {
 
-  private errorMessage : String;
+  public errorMessage : String;
 
   constructor(
     private createCategoryFormBuilder : FormBuilder,
@@ -18,7 +18,7 @@ export class AddCategoryComponent implements OnInit {
     private router : Router
   ) { }
 
-  private categoryCreateForm = this.createCategoryFormBuilder.group({
+  public categoryCreateForm = this.createCategoryFormBuilder.group({
     categoryCode: ['', [Validators.required,  Validators.maxLength(10)]],
     categoryName: ['', [Validators.required,  Validators.maxLength(15)]],
     categoryDescription: ['', [ Validators.maxLength(500)]],

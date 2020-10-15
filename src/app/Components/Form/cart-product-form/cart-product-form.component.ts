@@ -19,7 +19,7 @@ export class CartProductFormComponent implements OnInit {
     private cartService : CartService
   ) { }
 
-  private cartForm : FormGroup;
+  public cartForm : FormGroup;
 
   ngOnInit() {
     this.cartForm = this.addCartFormBuilder.group({

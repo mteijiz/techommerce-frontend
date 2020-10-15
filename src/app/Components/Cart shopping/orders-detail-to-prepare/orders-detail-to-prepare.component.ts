@@ -9,7 +9,9 @@ import { PurchaseService } from 'src/app/Service/Purchase/purchase.service';
 })
 export class OrdersDetailToPrepareComponent implements OnInit {
 
-  private purchaseOrder;
+  public purchaseOrder;
+  public errorMessage;
+  public p : any;
 
   constructor(
     private router: Router,
@@ -45,7 +47,7 @@ export class OrdersDetailToPrepareComponent implements OnInit {
         this.updateLocalStorage(this.purchaseOrder);
       },
       error => {
-        console.log(error);
+        this.errorMessage = error.error.message;
       }
     );
   }
@@ -58,7 +60,7 @@ export class OrdersDetailToPrepareComponent implements OnInit {
         this.updateLocalStorage(this.purchaseOrder);
       },
       error => {
-        console.log(error);
+        this.errorMessage = error.error.message;
       }
     );
   }

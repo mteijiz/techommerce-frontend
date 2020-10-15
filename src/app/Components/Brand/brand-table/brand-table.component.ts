@@ -9,8 +9,9 @@ import { BrandService } from 'src/app/Service/Brand/brand.service';
 })
 export class BrandTableComponent implements OnInit {
 
-  private brandList: Brand[];
-  private errorMessage: String;
+  public brandList: Brand[];
+  public errorMessage: String;
+  public p : any;
 
   constructor(
     private brandService: BrandService

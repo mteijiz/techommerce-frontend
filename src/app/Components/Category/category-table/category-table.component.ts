@@ -9,8 +9,9 @@ import { CategoryService } from 'src/app/Service/Category/category.service';
 })
 export class CategoryTableComponent implements OnInit {
 
-  private errorMessage: String;
-  private categoryList: Category[];
+  public errorMessage: String;
+  public categoryList: Category[];
+  public p : any;
 
   constructor(
     private categoryService: CategoryService

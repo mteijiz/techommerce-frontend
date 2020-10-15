@@ -24,7 +24,7 @@ export class CreditCardComponent implements OnInit {
 
   private productsPurchased : CartDetails [];
 
-  private creditCardForm = this.creditCardFormBuilder.group({
+  public creditCardForm = this.creditCardFormBuilder.group({
     ccNumber: ['', [Validators.required, ValidationService.creditCardNumberValidator]],
     ccExpMonth: ['', [Validators.required, ValidationService.monthTwoDigitsValidator, Validators.min(0), Validators.max(12), Validators.min(1)]],
     ccExpYear: ['', [Validators.required, ValidationService.yearTwoDigitsValidator]],

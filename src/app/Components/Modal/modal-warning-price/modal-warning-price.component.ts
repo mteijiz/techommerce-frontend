@@ -9,7 +9,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class ModalWarningPriceComponent implements OnInit {
 
   constructor(
-    private activeModal: NgbActiveModal
+    public activeModal: NgbActiveModal
   ) { }
 
   ngOnInit() {
