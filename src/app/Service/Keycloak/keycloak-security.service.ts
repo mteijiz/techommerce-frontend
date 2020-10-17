@@ -13,7 +13,7 @@ export class KeycloakSecurityService {
 
   async init() {
     this.keycloak = new Keycloak({
-      url: 'http://localhost:8180/auth',
+      url: 'https://techommerce-keycloak.herokuapp.com/auth',
       realm: 'techommerce',
       clientId: 'angular-app'
     });
